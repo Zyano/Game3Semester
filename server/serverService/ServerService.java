@@ -13,10 +13,10 @@ import java.util.concurrent.ConcurrentMap;
 
 
 public class ServerService {
-	
+
 	private static ServerService service;
 	private Map<InetAddress,Player> playerMap;
-	
+
 	/**
 	 * Creates the single ServerService instance. 
 	 * the creation of the concurrentHashMap happens here. 
@@ -25,7 +25,7 @@ public class ServerService {
 	private ServerService() {
 		playerMap = new ConcurrentHashMap<>(5, 0.9f, 4);
 	}
-	
+
 	/**
 	 * creates an instance of the service class if non is currently in existence.
 	 * @return ServerService  
@@ -36,10 +36,11 @@ public class ServerService {
 			if(service == null) {
 				service = new ServerService();
 			}
-			return service;
 		}
+		return service;
+
 	}
-	
+
 	/**
 	 * Adds a player to the ConcurrentHashMap, we first check if the
 	 * player already is stored in the map, if not we thereby create a
@@ -51,7 +52,7 @@ public class ServerService {
 	public void addPlayer(InetAddress ip, Player player) {
 		playerMap.put(ip, player);
 	}
-	
+
 	/**
 	 * remove the key and the underlying value from the map.
 	 * @param ip
@@ -64,7 +65,7 @@ public class ServerService {
 			}
 		}
 	}
-	
+
 	/**
 	 * return a HashMap of the concurrent map with the same keys and underlying values.
 	 * @return HashMap<Inetadress, Player>
