@@ -9,7 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class ServerService {
-	private static ServerService service;
+	
+	private static ServerService service ;
 	private Map<InetAddress,Player> playerMap;
 	
 	/**
@@ -17,15 +18,16 @@ public class ServerService {
 	 * the creation of the concurrentHashMap happens here. 
 	 * The map uses InetAdress as key and Player as the value.
 	 */
-	public ServerService() {
+	private ServerService() {
 		playerMap = new ConcurrentHashMap<InetAddress, Player>();
 	}
 	
 	/**
 	 * creates an instance of the service class if non is currently in existence.
 	 * @return ServerService  
+	 * We could use a argument of DCL - Double Checked Locking
 	 */
-	public static ServerService getInstance() {
+	public synchronized static ServerService getInstance() {
 		if(service == null) {
 			service = new ServerService();
 		}

@@ -9,8 +9,9 @@ import java.net.InetAddress;
 import serverService.ServerService;
 
 public class ObjectInThread extends Thread {
+	
 	private ObjectInputStream ois;
-	private boolean running;
+	private volatile boolean running;
 	private ServerService service;
 	private InetAddress ip;
 	
@@ -29,10 +30,10 @@ public class ObjectInThread extends Thread {
 
 	
 	/**
-	 * waits for input on the object stream if the object is of the type player then it's added/updated in collection on ServerService.
+	 * waits for input on the object stream if the object is of the type player 
+	 * then it's added/updated in collection on ServerService.
 	 */
 	public void run() {
-
 		while(running) {
 			try {
 				Object obj = ois.readObject();
@@ -41,19 +42,12 @@ public class ObjectInThread extends Thread {
 					service.addPlayer(ip, p1);
 				}
 			}
-			catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
+			catch (IOException e) {
+				System.err.println("IOException in ObjectInThread");
+			} catch (ClassNotFoundException e) {
+				System.err.println("Object is not of class Player");
 			}
 		}
-	}
-	
-	public boolean isRunning() {
-		return running;
-	}
-
-
-	public void setRunning(boolean running) {
-		this.running = running;
 	}
 
 	@Override

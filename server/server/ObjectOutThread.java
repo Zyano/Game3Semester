@@ -9,7 +9,7 @@ import serverService.ServerService;
 public class ObjectOutThread extends Thread {
 
 	private ObjectOutputStream out;
-	private boolean running;
+	private volatile boolean running;
 	private ServerService serverservice;
 	private InetAddress ip;
 
@@ -31,23 +31,13 @@ public class ObjectOutThread extends Thread {
 	 * TODO: Missing Exception for IP (Map<key, value> - 2 players with same name)
 	 */
 	public void run(){
-		try{
-			while(running){
+		while(running){
+			try {
 				out.writeObject(serverservice.getPlayerMap());
 				out.flush();
+			} catch (IOException e) {
+				System.err.println("IOException in ObjectOutThread");
 			}
-
-		} catch(IOException e){
-			e.printStackTrace();
 		}
-		
-	}
-
-	public boolean isRunning() {
-		return running;
-	}
-
-	public void setRunning(boolean running) {
-		this.running = running;
 	}
 }
