@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
 public class ServerService {
 	
 	private static ServerService service;
-	private ConcurrentMap<InetAddress,Player> playerMap;
+	private Map<InetAddress,Player> playerMap;
 	
 	/**
 	 * Creates the single ServerService instance. 
@@ -49,11 +49,7 @@ public class ServerService {
 	 * @param player
 	 */
 	public void addPlayer(InetAddress ip, Player player) {
-		Player p = playerMap.get(ip);
-		if(p == null){
-			p = player;
-			playerMap.putIfAbsent(ip, p);
-		}
+		playerMap.put(ip, player);
 	}
 	
 	/**
