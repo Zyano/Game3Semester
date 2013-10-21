@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 
 import serverService.ServerService;
 
@@ -10,7 +11,7 @@ public class ObjectOutThread extends Thread {
 	private ObjectOutputStream out;
 	private boolean running;
 	private ServerService serverservice;
-	private String ip;
+	private InetAddress ip;
 
 	/**
 	 * Object stream used to writing out player objects
@@ -18,7 +19,7 @@ public class ObjectOutThread extends Thread {
 	 * @param out
 	 * @param ip
 	 */
-	public ObjectOutThread(ObjectOutputStream out, String ip){
+	public ObjectOutThread(ObjectOutputStream out, InetAddress ip){
 		this.out = out;
 		running = true;
 		serverservice = ServerService.getInstance();

@@ -3,6 +3,7 @@ package server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,24 +19,28 @@ public class Server {
 			while(true){
 				Socket socket = serverSocket.accept();
 				System.out.println("Connection accepted");
+				InetAddress ip = socket.getInetAddress();
 				
-				
+				//Creating the ObjectOutputStream first, and thereby flushing so
+				//the head information is set before creating ObjectInputStream
 				ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-				//Used for writing information to the header for the ObjectInputStream
 				output.flush();
-				String message = "Hej Stefan!";
-
-				
-				output.writeObject(message);
-				
 				ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
 				
-
+				//For each connection we start an in and an out thread,
+				//sending the ip in both, thereby making it possible for 
+				//adding updates and removing different players.
+				ObjectInThread inThread = new ObjectInThread(input, ip);
+				ObjectOutThread outThread = new ObjectOutThread(output, ip);
+				
+				//Starting both threads.
+				inThread.start();
+				outThread.start();
+				
 			}
 
 		} catch (IOException e) {
 			System.err.println("Not possible to crete serversocket");
 		}
-
 	}
 }
