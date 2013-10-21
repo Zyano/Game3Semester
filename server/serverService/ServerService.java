@@ -6,12 +6,13 @@ import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 
 public class ServerService {
 	
-	private static ServerService service ;
-	private Map<InetAddress,Player> playerMap;
+	private static ServerService service;
+	private ConcurrentMap<InetAddress,Player> playerMap;
 	
 	/**
 	 * Creates the single ServerService instance. 
@@ -19,7 +20,7 @@ public class ServerService {
 	 * The map uses InetAdress as key and Player as the value.
 	 */
 	private ServerService() {
-		playerMap = new ConcurrentHashMap<InetAddress, Player>();
+		playerMap = new ConcurrentHashMap<>(5, 0.9f, 4);
 	}
 	
 	/**
@@ -27,21 +28,29 @@ public class ServerService {
 	 * @return ServerService  
 	 * We could use a argument of DCL - Double Checked Locking
 	 */
-	public synchronized static ServerService getInstance() {
-		if(service == null) {
-			service = new ServerService();
+	public static ServerService getInstance() {
+		synchronized (ServerService.class) {
+			if(service == null) {
+				service = new ServerService();
+			}
+			return service;
 		}
-		return service;
 	}
 	
 	/**
-	 * adds a player to the map using the InetAdress as the key.
-	 * if a player is already saved by the key that player is overwritten.
+	 * Adds a player to the ConcurrentHashMap, we first check if the
+	 * player already is stored in the map, if not we thereby create a
+	 * reference to the player and call the atomic thread safe method
+	 * pufIfAbsent so the new player is being stored correctly.
 	 * @param ip
-	 * @param p1
+	 * @param player
 	 */
-	public void addPlayer(InetAddress ip, Player p1) {
-		playerMap.put(ip, p1);
+	public void addPlayer(InetAddress ip, Player player) {
+		Player p = playerMap.get(ip);
+		if(p == null){
+			p = player;
+			playerMap.putIfAbsent(ip, p);
+		}
 	}
 	
 	/**
@@ -53,7 +62,7 @@ public class ServerService {
 	}
 	
 	/**
-	 * return a HashMap of the concurrentmap with the same keys and underlying values.
+	 * return a HashMap of the concurrent map with the same keys and underlying values.
 	 * @return HashMap<Inetadress, Player>
 	 */
 	public HashMap<InetAddress, Player> getPlayerMap() {
