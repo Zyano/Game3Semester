@@ -12,13 +12,23 @@ public class ObjectOutThread extends Thread {
 	private ServerService serverservice;
 	private String ip;
 
-	
+	/**
+	 * Object stream used to writing out player objects
+	 * ip used as key for the object.
+	 * @param out
+	 * @param ip
+	 */
 	public ObjectOutThread(ObjectOutputStream out, String ip){
 		this.out = out;
 		running = true;
 		serverservice = ServerService.getInstance();
 	}
 
+	/**
+	 * 
+	 * Writes out the list of players and flushes it.
+	 * TODO: Missing Exception for IP (Map<key, value> - 2 players with same name)
+	 */
 	public void run(){
 		try{
 			while(running){
@@ -29,7 +39,7 @@ public class ObjectOutThread extends Thread {
 		} catch(IOException e){
 			e.printStackTrace();
 		}
-		// Mangler Exception med IP (2 spillere med samme navn)
+		
 	}
 
 	public boolean isRunning() {
