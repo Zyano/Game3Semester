@@ -30,7 +30,7 @@ public class ServerService {
 		playerMap.remove(ip);
 	}
 	
-	public Map<String,Player> getPlayerList() {
+	public Map<String,Player> getPlayerMap() {
 		return new HashMap<String,Player>(playerMap);
 	}
 }

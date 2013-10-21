@@ -3,6 +3,8 @@ package server;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import serverSerice.ServerService;
+
 public class ObjectOutThread extends Thread {
 
 	private ObjectOutputStream out;
@@ -14,12 +16,13 @@ public class ObjectOutThread extends Thread {
 	public ObjectOutThread(ObjectOutputStream out, String ip){
 		this.out = out;
 		running = true;
+		serverservice = ServerService.getInstance();
 	}
 
 	public void run(){
 		try{
 			while(running){
-				out.writeObject(ServerService.getPlayerList());
+				out.writeObject(serverservice.getPlayerMap());
 				out.flush();
 			}
 
