@@ -4,14 +4,15 @@ import game.Player;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.InetAddress;
 
-import serverSerice.ServerService;
+import serverService.ServerService;
 
 public class ObjectInThread extends Thread {
 	private ObjectInputStream ois;
 	private boolean running;
 	private ServerService service;
-	private String ip;
+	private InetAddress ip;
 	
 	/**
 	 *  Object stream used for receiving player objects.
@@ -19,9 +20,10 @@ public class ObjectInThread extends Thread {
 	 * @param ois
 	 * @param ip
 	 */
-	public ObjectInThread(ObjectInputStream ois, String ip) {
+	public ObjectInThread(ObjectInputStream ois, InetAddress ip) {
 		this.ois = ois;
 		running = true;
+		this.ip = ip;
 		service = ServerService.getInstance();
 	}
 
@@ -43,5 +45,19 @@ public class ObjectInThread extends Thread {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public boolean isRunning() {
+		return running;
+	}
+
+
+	public void setRunning(boolean running) {
+		this.running = running;
+	}
+
+	@Override
+	public String toString() {
+		return "ObjectInThread [running=" + running + ", ip=" + ip + "]";
 	}
 }

@@ -3,7 +3,7 @@ package server;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import serverSerice.ServerService;
+import serverService.ServerService;
 
 public class ObjectOutThread extends Thread {
 

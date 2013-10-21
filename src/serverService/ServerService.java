@@ -1,7 +1,8 @@
-package serverSerice;
+package serverService;
 
 import game.Player;
 
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,10 +10,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class ServerService {
 	private static ServerService service;
-	private Map<String,Player> playerMap;
+	private Map<InetAddress,Player> playerMap;
 	
 	public ServerService() {
-		playerMap = new ConcurrentHashMap<String, Player>();
+		playerMap = new ConcurrentHashMap<InetAddress, Player>();
 	}
 	
 	public static ServerService getInstance() {
@@ -22,7 +23,7 @@ public class ServerService {
 		return service;
 	}
 	
-	public void addPlayer(String ip, Player p1) {
+	public void addPlayer(InetAddress ip, Player p1) {
 		playerMap.put(ip, p1);
 	}
 	
@@ -30,7 +31,7 @@ public class ServerService {
 		playerMap.remove(ip);
 	}
 	
-	public Map<String,Player> getPlayerMap() {
-		return new HashMap<String,Player>(playerMap);
+	public HashMap<InetAddress, Player> getPlayerMap() {
+		return new HashMap<InetAddress,Player>(playerMap);
 	}
 }
