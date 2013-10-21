@@ -83,7 +83,7 @@ public class gameplayer {
 		};
 		if (direction.equals("up")) {
 			y = me.getYpos() - 1;
-		};
+		};	
 		if (direction.equals("down")) {
 			y = me.getYpos() + 1;
 		};
