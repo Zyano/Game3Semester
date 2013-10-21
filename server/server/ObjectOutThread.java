@@ -33,7 +33,7 @@ public class ObjectOutThread extends Thread {
 	public void run(){
 		while(running){
 			try {
-				out.writeObject(serverservice.getPlayerMap());
+				out.writeObject(serverservice.getPlayers());
 				out.flush();
 			} catch (IOException e) {
 				System.err.println("IOException in ObjectOutThread");

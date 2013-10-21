@@ -3,7 +3,10 @@ package serverService;
 import game.Player;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -57,15 +60,24 @@ public class ServerService {
 	 * remove the key and the underlying value from the map.
 	 * @param ip
 	 */
-	public void removePlayer(String ip) {
-		playerMap.remove(ip);
+	public void removePlayer(InetAddress ip) {
+		for(Iterator<InetAddress> it = playerMap.keySet().iterator(); it.hasNext();){
+			InetAddress temp = it.next();
+			if(temp.equals(ip)){
+				it.remove();
+			}
+		}
 	}
 	
 	/**
 	 * return a HashMap of the concurrent map with the same keys and underlying values.
 	 * @return HashMap<Inetadress, Player>
 	 */
-	public HashMap<InetAddress, Player> getPlayerMap() {
-		return new HashMap<InetAddress,Player>(playerMap);
+	public List<Player> getPlayers() {
+		List<Player> result = new ArrayList<>();
+		for(Iterator<Player> it = playerMap.values().iterator(); it.hasNext();){
+			result.add(it.next());
+		}
+		return result;
 	}
 }
