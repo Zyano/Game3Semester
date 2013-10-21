@@ -33,6 +33,7 @@ public class Server {
 				ObjectInThread inThread = new ObjectInThread(input, ip);
 				ObjectOutThread outThread = new ObjectOutThread(output, ip);
 				
+				System.out.println("Now starting threads for connection");
 				//Starting both threads.
 				inThread.start();
 				outThread.start();
