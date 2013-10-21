@@ -5,13 +5,18 @@ import game.Player;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import serverSerice.ServerService;
+
 public class ObjectInThread extends Thread {
 	private ObjectInputStream ois;
 	private boolean running;
-
-	public ObjectInThread(ObjectInputStream ois) {
+	private ServerService service;
+	private String ip;
+	
+	public ObjectInThread(ObjectInputStream ois, String ip) {
 		this.ois = ois;
 		running = true;
+		service = ServerService.getInstance();
 	}
 
 	public void run() {
@@ -21,7 +26,7 @@ public class ObjectInThread extends Thread {
 				Object obj = ois.readObject();
 				if(obj instanceof Player) {
 					Player p1 = (Player) obj;
-					
+					service.addPlayer(ip, p1);
 				}
 			}
 			catch (IOException | ClassNotFoundException e) {
