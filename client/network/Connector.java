@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class Connector {
+	
 	private String ip;
 	private int port;
 	private ObjectStreamer os;
@@ -29,8 +30,6 @@ public class Connector {
 			s = new Socket(ip, port);
 			
 			if(s.isConnected() && !s.isClosed()) {
-				s.getOutputStream().flush();
-				
 				os = new ObjectStreamer(s.getOutputStream());
 				
 				ObjectReceiver or = new ObjectReceiver(s.getInputStream());

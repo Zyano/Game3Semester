@@ -11,9 +11,10 @@ import model.Player;
 import clientService.ClientService;
 
 public class ObjectReceiver extends Thread {
+	
 	private ObjectInputStream objectStream;
 	private ClientService service;
-	private boolean running;
+	private volatile boolean running;
 	
 	/**
 	 * Given an input stream the constructor creates the ObjectInputStream used in the run method of receiver.
@@ -22,7 +23,7 @@ public class ObjectReceiver extends Thread {
 	 * @throws IOException 
 	 */
 	public ObjectReceiver(InputStream ois) throws IOException {
-		this.objectStream = new ObjectInputStream(ois);
+		objectStream = new ObjectInputStream(ois);
 		service = ClientService.getInstance();
 		running = true;
 	}
@@ -42,6 +43,8 @@ public class ObjectReceiver extends Thread {
 			}
 			
 			if(obj instanceof ArrayList<?>) {
+				//We know that it is always an ArrayList containing players
+				@SuppressWarnings("unchecked")
 				List<Player> list = (ArrayList<Player>) obj;
 				service.updatePlayerList(list);
 			}

@@ -11,6 +11,7 @@ import model.Player;
  * @author Stefan
  */
 public class ObjectStreamer {
+	
 	private ObjectOutputStream oos;
 	
 	/**
@@ -20,6 +21,7 @@ public class ObjectStreamer {
 	public ObjectStreamer (OutputStream os) {
 		try {
 			oos = new ObjectOutputStream(os);
+			oos.flush();
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to create ObjectOutputStream");
 		}
