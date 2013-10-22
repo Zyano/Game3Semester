@@ -1,6 +1,7 @@
 package game;
 import java.util.ArrayList;
 
+import clientService.ClientService;
 import model.Player;
 public class gameplayer {
 	
@@ -57,9 +58,12 @@ public class gameplayer {
 			{ "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w",
 					"w", "w", "w", "w", "w", "w", "w", "w" }, };
 	// level is defined column by column
-	Screen screen; 
-	ArrayList<Player> players;
-
+	private Screen screen; 
+	private ArrayList<Player> players;
+	private ClientService service;
+	
+	
+	
 	public gameplayer(Player me, ScoreList s,ArrayList<Player> players) {
 	
 		this.players =players;
@@ -68,7 +72,8 @@ public class gameplayer {
 		screen = new Screen(level,me.getXpos(),me.getYpos());
 		screen.setVisible(true);	
 		ko = new KeyClass(this);
-		screen.addKeyListener(ko); 
+		screen.addKeyListener(ko);
+		service = ClientService.getInstance();
 	}
 
 	
@@ -100,5 +105,6 @@ public class gameplayer {
 			me.setXpos(x);
 			me.setYpos(y);
 		}
+		service.sendPlayerObject(me);
 	}
 }

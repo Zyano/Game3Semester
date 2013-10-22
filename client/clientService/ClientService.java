@@ -3,13 +3,17 @@ package clientService;
 
 import java.util.List;
 
+import network.Connector;
 import model.Player;
 
 public class ClientService {
+	
 	private static ClientService service;
+	private Connector connection;
+	
 	
 	private ClientService() {
-		
+		connection = new Connector("localhost", "8888");
 	}
 	
 	/**
@@ -20,7 +24,6 @@ public class ClientService {
 		if(service == null) {
 			service = new ClientService();
 		}
-		
 		return service;
 	}
 
@@ -29,7 +32,7 @@ public class ClientService {
 	 * @param Player
 	 */
 	public void sendPlayerObject(Player p) {
-		
+		connection.sendPlayer(p);
 	}
 	
 	/**

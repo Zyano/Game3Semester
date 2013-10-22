@@ -41,6 +41,7 @@ public class ObjectInThread extends Thread {
 				if(obj instanceof Player) {
 					Player p1 = (Player) obj;
 					service.addPlayer(ip, p1);
+					System.out.println("GOTTTA " + p1);
 				}
 			}
 			catch (IOException e) {

@@ -3,6 +3,8 @@ package network;
 import java.io.IOException;
 import java.net.Socket;
 
+import model.Player;
+
 public class Connector {
 	
 	private String ip;
@@ -18,6 +20,7 @@ public class Connector {
 	public Connector(String ip, String port) {
 		this.port = Integer.parseInt(port);
 		this.ip = ip;
+		connect();
 	}
 	
 	/**
@@ -47,5 +50,13 @@ public class Connector {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Sends a player to the ObjectOutputStream
+	 * @param p
+	 */
+	public void sendPlayer(Player p){
+		os.streamPlayer(p);
 	}
 }
