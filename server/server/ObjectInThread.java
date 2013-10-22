@@ -1,10 +1,11 @@
 package server;
 
-import game.Player;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.InetAddress;
+
+import model.Player;
 
 import serverService.ServerService;
 

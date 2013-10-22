@@ -3,6 +3,8 @@ package game;
 import java.util.ArrayList;
 import java.io.*;
 
+import model.Player;
+
 public class game {
 
 	/**

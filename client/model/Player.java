@@ -1,4 +1,4 @@
-package game;
+package model;
 
 public class Player {
 	String name;
@@ -41,15 +41,15 @@ public class Player {
 		this.direction = direction;
 	}
 
-	String ToString () {
+	public String ToString () {
 		return name + "   " + point;
 	}
-	void addOnePoint() {
-
+	
+	public void addOnePoint() {
 		point ++;
 	}
 
-	void subOnePoint() {
+	public void subOnePoint() {
 		point --;
 	}
 }

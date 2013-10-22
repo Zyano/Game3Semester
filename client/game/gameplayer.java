@@ -1,5 +1,7 @@
 package game;
 import java.util.ArrayList;
+
+import model.Player;
 public class gameplayer {
 	
 	// Players start values
@@ -73,7 +75,7 @@ public class gameplayer {
 
 
 	public void PlayerMoved(String direction) {
-		me.direction = direction;
+		me.setDirection(direction);
 		int x = me.getXpos(),y = me.getYpos();
 		if (direction.equals("right")) {
 			x = me.getXpos() + 1;

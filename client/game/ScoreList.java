@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import model.Player;
+
 public class ScoreList extends JFrame {
 
 	/**
