@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Player;
-
 import clientService.ClientService;
 
 public class ObjectReceiver extends Thread {
@@ -42,8 +42,8 @@ public class ObjectReceiver extends Thread {
 			}
 			
 			if(obj instanceof ArrayList<?>) {
-				ArrayList<Player> list = (ArrayList<Player>) obj;
-				service.updatePlayerList(list); 
+				List<Player> list = (ArrayList<Player>) obj;
+				service.updatePlayerList(list);
 			}
 		}
 	}

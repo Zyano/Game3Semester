@@ -6,6 +6,8 @@ import java.net.Socket;
 public class Connector {
 	private String ip;
 	private int port;
+	private ObjectStreamer os;
+	private Socket s;
 	
 	/**
 	 * Set the IP/Hostname and port used when the connect method is called.
@@ -19,21 +21,30 @@ public class Connector {
 	
 	/**
 	 * Creates the socket with the ip and port provided in the constructor.
-	 * if the connection is sucessfully created and the connection is alive.
+	 * if the connection is successfully created and the connection is alive.
 	 * Then ObjectReciver and ObjectStreamer is spawned and stated with the each of the streams from the socket.
 	 */
 	public void connect() {
 		try {
-			Socket s = new Socket(ip, port);
+			s = new Socket(ip, port);
 			
 			if(s.isConnected() && !s.isClosed()) {
+				s.getOutputStream().flush();
+				
+				os = new ObjectStreamer(s.getOutputStream());
+				
 				ObjectReceiver or = new ObjectReceiver(s.getInputStream());
 				or.start();
 				
-				ObjectStreamer os = new ObjectStreamer(s.getOutputStream());
-				
 			}
-			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void disconnect() {
+		try {
+			s.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
