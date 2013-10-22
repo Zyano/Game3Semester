@@ -73,7 +73,10 @@ public class gameplayer {
 		screen.setVisible(true);	
 		ko = new KeyClass(this);
 		screen.addKeyListener(ko);
+		
+		
 		service = ClientService.getInstance();
+		service.sendPlayerObject(me);
 	}
 
 	

@@ -8,7 +8,7 @@ import model.Player;
 
 public class ClientService {
 	
-	private static ClientService service;
+	private static final ClientService service = new ClientService();
 	private Connector connection;
 	
 	
@@ -21,9 +21,6 @@ public class ClientService {
 	 * @return ClientService
 	 */
 	public static ClientService getInstance() {
-		if(service == null) {
-			service = new ClientService();
-		}
 		return service;
 	}
 
@@ -41,7 +38,9 @@ public class ClientService {
 	 * @param list<player>
 	 */
 	public void updatePlayerList(List<Player> list) {
+		System.out.println("HGER");
 		
+		System.out.println(list);
 	}
 	
 	

@@ -41,7 +41,7 @@ public class Server {
 			}
 
 		} catch (IOException e) {
-			System.err.println("Not possible to crete serversocket");
+			System.err.println("Not possible to create serversocket");
 		}
 	}
 }
