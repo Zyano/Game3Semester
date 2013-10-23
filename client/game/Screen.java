@@ -1,14 +1,12 @@
 package game;
 
 import java.awt.GridLayout;
-
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 
-public class Screen extends JFrame {
+public class Screen extends JFrame{
 	private JLabel[][] labels = new JLabel[20][20];
 	
 	
@@ -73,4 +71,5 @@ public class Screen extends JFrame {
 		labels[posX][posY].setIcon(
 				new ImageIcon("./Image/HeltOp.png"));
 	}
+
 }

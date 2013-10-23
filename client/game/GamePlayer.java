@@ -1,9 +1,12 @@
 package game;
 import java.util.ArrayList;
+import java.util.List;
+
+import observer.Observer;
 
 import clientService.ClientService;
 import model.Player;
-public class GamePlayer {
+public class GamePlayer implements Observer{
 	
 	// Players start values
 	//private String playerDirection = "up";
@@ -109,5 +112,10 @@ public class GamePlayer {
 			me.setYpos(y);
 		}
 		service.sendPlayerObject(me);
+	}
+
+	@Override
+	public void update(List<Player> list) {
+		
 	}
 }
