@@ -30,6 +30,8 @@ public class Screen extends JFrame{
 	}
 	public void movePlayerOnScreen(int oldX, int oldY, int x, int y,String playerDirection) {
 	
+		
+//		System.out.println("OldX " + oldX + " OldY " + oldY + " X " + x + " Y " + y + " Direction: " + playerDirection);
 		labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 
 		if (playerDirection.equals("right")) {

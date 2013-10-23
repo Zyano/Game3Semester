@@ -87,39 +87,32 @@ public class GamePlayer implements Observer{
 
 	public void PlayerMoved(String direction) {
 		me.setDirection(direction);
-
+		int x = me.getXpos();
+		int y = me.getYpos();
+		me.setOldXPos(x);
+		me.setOldYPos(y);
 		if (direction.equals("right")) {
-			me.setOldXPos(me.getXpos());
-			me.setXpos(me.getXpos()+1);
-			System.out.println(me.getXpos());
+			x = me.getXpos() + 1;
 		};
-
 		if (direction.equals("left")) {
-			me.setOldXPos(me.getXpos());
-			me.setXpos(me.getXpos()-1);
-			System.out.println(me.getXpos());
+			x = me.getXpos() - 1;
 		};
-
 		if (direction.equals("up")) {
-			me.setOldYPos(me.getYpos());
-			me.setYpos(me.getYpos()-1);
-			System.out.println(me.getYpos());
+			y = me.getYpos() - 1;
 		};
-
 		if (direction.equals("down")) {
-			me.setOldYPos(me.getYpos());
-			me.setYpos(me.getYpos()+1);
-			System.out.println(me.getYpos());
+			y = me.getYpos() + 1;
 		};
-
-		if (level[me.getXpos()][me.getYpos()].equals(wall)) {
+		if (level[x][y].equals(wall)) {
 			me.subOnePoint();
 			slist.updateScoreOnScreenAll();
-		} else {
+		} 
+		else {
 			me.addOnePoint();
 			slist.updateScoreOnScreenAll();
-			screen.movePlayerOnScreen(me.getOldXPos(), me.getOldYPos(), me.getXpos(), me.getYpos(),me.getDirection());
-			System.out.println("Old X: "+me.getOldXPos() + " Old Y: " + me.getOldYPos() + " new X " + me.getXpos() + " new Y: " + me.getYpos());
+			screen.movePlayerOnScreen(me.getOldXPos(), me.getOldYPos(), x, y,me.getDirection());
+			me.setXpos(x);
+			me.setYpos(y);
 		}
 		service.sendPlayerObject(me);
 	}

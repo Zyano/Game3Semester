@@ -15,8 +15,8 @@ public class Player implements Serializable {
 		this.name = name;
 		xpos = 5;
 		ypos = 7;
-		oldXPos =-1;
-		oldYPos=-1;
+		oldXPos = 5;
+		oldYPos= 7;
 		point = 0;
 		direction = "up";
 	}
@@ -29,6 +29,7 @@ public class Player implements Serializable {
 	}
 
 	public void setXpos(int xpos) {
+		System.out.println("Set X pos " + xpos);
 		this.xpos = xpos;
 	}
 
@@ -37,6 +38,7 @@ public class Player implements Serializable {
 	}
 
 	public void setYpos(int ypos) {
+		System.out.println("Set Y pos " + ypos);
 		this.ypos = ypos;
 	}
 	public String getDirection() {
@@ -62,12 +64,14 @@ public class Player implements Serializable {
 		return oldXPos;
 	}
 	public void setOldXPos(int oldXPos) {
+		System.out.println("Set X old pos " + oldXPos);
 		this.oldXPos = oldXPos;
 	}
 	public int getOldYPos() {
 		return oldYPos;
 	}
 	public void setOldYPos(int oldYPos) {
+		System.out.println("Set Y old pos " + oldYPos);
 		this.oldYPos = oldYPos;
 	}
 }
