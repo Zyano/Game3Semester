@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Player;
-import clientService.ClientService;
 
 public class ObjectReceiver extends Thread {
 	
 	private ObjectInputStream objectStream;
-	private ClientService service;
+//	private ClientService service;
 	private volatile boolean running;
+	private PlayerListContainer playerListContainer;
 	
 	/**
 	 * Given an input stream the constructor creates the ObjectInputStream used in the run method of receiver.
@@ -22,10 +22,11 @@ public class ObjectReceiver extends Thread {
 	 * @param ObjectInputStream
 	 * @throws IOException 
 	 */
-	public ObjectReceiver(InputStream ois) throws IOException {
+	public ObjectReceiver(InputStream ois, PlayerListContainer plc) throws IOException {
 		objectStream = new ObjectInputStream(ois);
-		service = ClientService.getInstance();
+//		service = ClientService.getInstance();
 		running = true;
+		playerListContainer = plc;
 	}
 	
 	/**
@@ -46,7 +47,7 @@ public class ObjectReceiver extends Thread {
 				//We know that it is always an ArrayList containing players
 				@SuppressWarnings("unchecked")
 				List<Player> list = (ArrayList<Player>) obj;
-				service.updatePlayerList(list);
+				playerListContainer.setList(list);
 			}
 		}
 	}

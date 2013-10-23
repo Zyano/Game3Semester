@@ -4,9 +4,9 @@ import java.awt.event.KeyListener;
 
 
 public class KeyClass implements KeyListener {
-	private gameplayer g;
+	private GamePlayer g;
 
-	public KeyClass(gameplayer g){
+	public KeyClass(GamePlayer g){
 		this.g = g;
 	}
 

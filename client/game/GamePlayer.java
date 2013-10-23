@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import clientService.ClientService;
 import model.Player;
-public class gameplayer {
+public class GamePlayer {
 	
 	// Players start values
 	//private String playerDirection = "up";
@@ -64,7 +64,7 @@ public class gameplayer {
 	
 	
 	
-	public gameplayer(Player me, ScoreList s,ArrayList<Player> players) {
+	public GamePlayer(Player me, ScoreList s,ArrayList<Player> players) {
 	
 		this.players =players;
 		this.me = me;

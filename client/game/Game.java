@@ -5,7 +5,7 @@ import java.io.*;
 
 import model.Player;
 
-public class game {
+public class Game {
 
 	/**
 	 * @param args
@@ -27,7 +27,7 @@ public class game {
 		
 		ScoreList s = new ScoreList(players);
 		s.setVisible(true);
-		gameplayer g = new gameplayer(me,s,players);
+		GamePlayer g = new GamePlayer(me,s,players);
 	}
 
 }

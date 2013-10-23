@@ -11,6 +11,7 @@ public class Connector {
 	private int port;
 	private ObjectStreamer os;
 	private Socket s;
+	private PlayerListContainer plc;
 	
 	/**
 	 * Set the IP/Hostname and port used when the connect method is called.
@@ -35,7 +36,8 @@ public class Connector {
 			if(s.isConnected() && !s.isClosed()) {
 				os = new ObjectStreamer(s.getOutputStream());
 				
-				ObjectReceiver or = new ObjectReceiver(s.getInputStream());
+				plc = new PlayerListContainer();
+				ObjectReceiver or = new ObjectReceiver(s.getInputStream(), plc);
 				or.start();
 				
 			}

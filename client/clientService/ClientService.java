@@ -1,6 +1,8 @@
 package clientService;
 
 
+import game.GamePlayer;
+
 import java.util.List;
 
 import network.Connector;
@@ -13,7 +15,7 @@ public class ClientService {
 
 
 	private ClientService() {
-		
+		connection = new Connector("localhost", "8888");
 	}
 
 	/**
@@ -24,7 +26,6 @@ public class ClientService {
 		synchronized (ClientService.class) {
 			if(service == null){
 				service = new ClientService();
-				connection = new Connector("localhost", "8888");
 			}
 		}
 		return service;
@@ -47,6 +48,8 @@ public class ClientService {
 		System.out.println(list);
 	}
 
-
+	public void subscribeForPlayerListUpdates(GamePlayer gp) {
+		
+	}
 
 }
