@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Player implements Serializable {
 	private String name;
 	private int xpos;
@@ -20,6 +21,7 @@ public class Player implements Serializable {
 		point = 0;
 		direction = "up";
 	}
+	
 	public int getPoint() {
 		return point;
 	}
@@ -60,16 +62,20 @@ public class Player implements Serializable {
 	public void subOnePoint() {
 		point --;
 	}
+	
 	public int getOldXPos() {
 		return oldXPos;
 	}
+	
 	public void setOldXPos(int oldXPos) {
 		System.out.println("Set X old pos " + oldXPos);
 		this.oldXPos = oldXPos;
 	}
+	
 	public int getOldYPos() {
 		return oldYPos;
 	}
+	
 	public void setOldYPos(int oldYPos) {
 		System.out.println("Set Y old pos " + oldYPos);
 		this.oldYPos = oldYPos;

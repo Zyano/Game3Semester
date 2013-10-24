@@ -40,6 +40,7 @@ public class ObjectInThread extends Thread {
 				Object obj = ois.readObject();
 				if(obj instanceof Player) {
 					Player p1 = (Player) obj;
+					System.out.println("Object received from IP: " + ip.toString());
 					service.addPlayer(ip, p1);
 				}
 			}

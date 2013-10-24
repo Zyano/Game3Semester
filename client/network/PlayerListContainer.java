@@ -44,9 +44,5 @@ public class PlayerListContainer implements Subject{
 	@Override
 	public void removeObserver(Observer o) {
 		observers.remove(o);
-		
 	}
-	
-	
-	
 }

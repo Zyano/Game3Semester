@@ -61,4 +61,8 @@ public class Connector {
 	public void sendPlayer(Player p){
 		os.streamPlayer(p);
 	}
+	
+	public PlayerListContainer getPlc() {
+		return plc;
+	}
 }

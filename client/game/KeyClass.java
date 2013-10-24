@@ -11,17 +11,17 @@ public class KeyClass implements KeyListener {
 	}
 
 	public void keyPressed(KeyEvent ke) {
-		if (ke.getKeyCode() == ke.VK_UP) {
+		if (ke.getKeyCode() == KeyEvent.VK_UP) {
 			g.PlayerMoved("up");
 		}
 
-		if (ke.getKeyCode() == ke.VK_DOWN) {
+		if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
 			g.PlayerMoved("down");
 		}
-		if (ke.getKeyCode() == ke.VK_LEFT) {
+		if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 			g.PlayerMoved("left");
 		}
-		if (ke.getKeyCode() == ke.VK_RIGHT) {
+		if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 			g.PlayerMoved("right");
 		}
 	}

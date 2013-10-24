@@ -1,12 +1,9 @@
-package clientService;
+package service;
 
 
-import game.GamePlayer;
-
-import java.util.List;
-
-import network.Connector;
 import model.Player;
+import network.Connector;
+import network.PlayerListContainer;
 
 public class ClientService {
 
@@ -39,17 +36,8 @@ public class ClientService {
 		connection.sendPlayer(p);
 	}
 
-	/**
-	 * Update the UI with the newly received player list
-	 * TODO: create the method in the gui for updating the list and the methods called for making sure the scorelist is up to date.
-	 * @param list<player>
-	 */
-	public void updatePlayerList(List<Player> list) {
-		System.out.println(list);
+	public PlayerListContainer getPlayerListContainer() {
+		return connection.getPlc();
 	}
-
-	public void subscribeForPlayerListUpdates(GamePlayer gp) {
-		
-	}
-
+	
 }

@@ -2,6 +2,7 @@ package game;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +14,7 @@ public class ScoreList extends JFrame {
 	/**
 	 * @param args
 	 */
-	ArrayList<Player> players;
+	private List<Player> players;
 //	Player me;
 	private ArrayList<JLabel> labels = new ArrayList<JLabel>();
 
@@ -27,18 +28,25 @@ public class ScoreList extends JFrame {
 		this.setLayout(new GridLayout(20, 20, 0, 0));
 		this.setVisible(true);
 		this.players = players;
-		draw();
+//		draw();
 		this.setAlwaysOnTop(true);
 	}
-	public void draw() {
-		for (int j = 0; j < players.size(); j++) {
-				JLabel l = new JLabel(players.get(j).ToString());
-				l.setSize(50,200);
-				this.add(l);
-				labels.add(l);
-		}	
-	}	
+	
+	/**
+	 * most likely rudendant and no longer needed for the creation of the score screen.
+	 */
+//	public void draw() {
+//		for (int j = 0; j < players.size(); j++) {
+//				JLabel l = new JLabel(players.get(j).ToString());
+//				l.setSize(50,200);
+//				this.add(l);
+//				labels.add(l);
+//		}	
+//	}	
 		
+	/**
+	 * updates the score screen using with the data last set using the updatePlayerScores.
+	 */
 	public void updateScoreOnScreenAll() {
 		if (players.size() > labels.size()) {
 			//new players
@@ -60,12 +68,16 @@ public class ScoreList extends JFrame {
 		}
 		for (int j = 0; j < players.size(); j++) {
 			labels.get((j)).setText(players.get(j).ToString());
-			
 		}
 	
 	}
-
-
 	
-}	
-	
+	/**
+	 * Method called when you need to update the score list with a new list of players.
+	 * @param list
+	 */
+	public void updatePlayerScores(List<Player> list) {
+		players = list;
+		updateScoreOnScreenAll();
+	}
+}

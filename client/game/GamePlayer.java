@@ -1,12 +1,7 @@
 package game;
-import java.util.ArrayList;
-import java.util.List;
-
-import observer.Observer;
-
-import clientService.ClientService;
 import model.Player;
-public class GamePlayer implements Observer{
+import service.ClientService;
+public class GamePlayer{
 
 	// Players start values
 	//private String playerDirection = "up";
@@ -15,75 +10,48 @@ public class GamePlayer implements Observer{
 
 	private String wall = "w";
 	private KeyClass ko;
-	ScoreList slist;
-
+	private ScoreList slist;
 
 	// level is defined column by column, the first row is the first column on the screen.
-	private String[][] level = {
-			{ "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w",
-				"w", "w", "w", "w", "w", "w", "w", "w" },
-				{ "w", "e", "e", "e", "e", "e", "e", "e", "e", "w", "w", "e", "e",
-					"e", "e", "e", "e", "e", "e", "w" },
-					{ "w", "e", "w", "e", "e", "w", "e", "e", "w", "w", "w", "e", "w",
-						"e", "e", "w", "e", "e", "w", "w" },
-						{ "w", "e", "w", "e", "e", "w", "e", "e", "e", "w", "w", "e", "w",
-							"e", "e", "w", "e", "e", "w", "w" },
-							{ "w", "e", "e", "w", "e", "e", "e", "e", "e", "e", "e", "e", "e",
-								"e", "e", "e", "e", "e", "e", "w" },
-								{ "w", "e", "w", "e", "w", "e", "w", "e", "w", "e", "w", "e", "w",
-									"e", "e", "w", "e", "e", "w", "w" },
-									{ "w", "e", "w", "e", "e", "e", "e", "e", "w", "w", "w", "e", "w",
-										"e", "e", "w", "e", "e", "w", "w" },
-										{ "w", "e", "w", "e", "e", "e", "e", "e", "w", "e", "w", "e", "w",
-											"e", "e", "w", "e", "e", "w", "w" },
-											{ "w", "e", "e", "e", "w", "e", "w", "e", "e", "w", "e", "e", "w",
-												"e", "e", "w", "e", "e", "e", "w" },
-												{ "w", "e", "e", "e", "e", "e", "w", "e", "e", "w", "e", "e", "w",
-													"e", "e", "w", "e", "e", "e", "w" },
-													{ "w", "e", "w", "w", "e", "w", "w", "e", "e", "e", "e", "e", "e",
-														"e", "e", "w", "e", "e", "w", "w" },
-														{ "w", "e", "e", "w", "e", "w", "e", "e", "e", "e", "w", "e", "e",
-															"e", "e", "w", "e", "e", "w", "w" },
-															{ "w", "e", "e", "e", "e", "e", "e", "e", "e", "w", "w", "e", "w",
-																"e", "e", "w", "e", "e", "w", "w" },
-																{ "w", "e", "e", "e", "e", "e", "e", "e", "e", "e", "w", "e", "w",
-																	"e", "e", "w", "e", "e", "w", "w" },
-																	{ "w", "e", "e", "e", "e", "e", "e", "e", "e", "w", "e", "e", "e",
-																		"e", "e", "w", "e", "e", "w", "w" },
-																		{ "w", "e", "e", "w", "e", "e", "e", "e", "e", "e", "e", "e", "e",
-																			"e", "e", "e", "e", "e", "w", "w" },
-																			{ "w", "e", "e", "w", "e", "w", "w", "w", "e", "e", "w", "e", "w",
-																				"e", "e", "w", "w", "e", "w", "w" },
-																				{ "w", "e", "w", "e", "e", "e", "e", "e", "e", "w", "w", "e", "w",
-																					"e", "e", "e", "e", "e", "w", "w" },
-																					{ "w", "e", "e", "e", "w", "e", "e", "e", "w", "w", "e", "e", "w",
-																						"e", "e", "e", "e", "e", "e", "w" },
-																						{ "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w",
-																							"w", "w", "w", "w", "w", "w", "w", "w" }, };
+	public static final String[][] level = 
+		{
+			{ "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w","w", "w", "w", "w", "w", "w", "w", "w" },
+			{ "w", "e", "e", "e", "e", "e", "e", "e", "e", "w", "w", "e", "e","e", "e", "e", "e", "e", "e", "w" },
+			{ "w", "e", "w", "e", "e", "w", "e", "e", "w", "w", "w", "e", "w","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "w", "e", "e", "w", "e", "e", "e", "w", "w", "e", "w","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "e", "w", "e", "e", "e", "e", "e", "e", "e", "e", "e","e", "e", "e", "e", "e", "e", "w" },
+			{ "w", "e", "w", "e", "w", "e", "w", "e", "w", "e", "w", "e", "w","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "w", "e", "e", "e", "e", "e", "w", "w", "w", "e", "w","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "w", "e", "e", "e", "e", "e", "w", "e", "w", "e", "w","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "e", "e", "w", "e", "w", "e", "e", "w", "e", "e", "w","e", "e", "w", "e", "e", "e", "w" },
+			{ "w", "e", "e", "e", "e", "e", "w", "e", "e", "w", "e", "e", "w","e", "e", "w", "e", "e", "e", "w" },
+			{ "w", "e", "w", "w", "e", "w", "w", "e", "e", "e", "e", "e", "e","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "e", "w", "e", "w", "e", "e", "e", "e", "w", "e", "e","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "e", "e", "e", "e", "e", "e", "e", "w", "w", "e", "w","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "e", "e", "e", "e", "e", "e", "e", "e", "w", "e", "w","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "e", "e", "e", "e", "e", "e", "e", "w", "e", "e", "e","e", "e", "w", "e", "e", "w", "w" },
+			{ "w", "e", "e", "w", "e", "e", "e", "e", "e", "e", "e", "e", "e","e", "e", "e", "e", "e", "w", "w" },
+			{ "w", "e", "e", "w", "e", "w", "w", "w", "e", "e", "w", "e", "w","e", "e", "w", "w", "e", "w", "w" },
+			{ "w", "e", "w", "e", "e", "e", "e", "e", "e", "w", "w", "e", "w","e", "e", "e", "e", "e", "w", "w" },
+			{ "w", "e", "e", "e", "w", "e", "e", "e", "w", "w", "e", "e", "w","e", "e", "e", "e", "e", "e", "w" },
+			{ "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w","w", "w", "w", "w", "w", "w", "w", "w" }, 
+	};
 	// level is defined column by column
 	private Screen screen; 
-	private ArrayList<Player> players;
 	private ClientService service;
 
+	public GamePlayer(Player me, ScoreList s, Screen screen) {
 
-
-	public GamePlayer(Player me, ScoreList s,ArrayList<Player> players) {
-
-		this.players =players;
 		this.me = me;
 		this.slist = s;
-		screen = new Screen(level,me.getXpos(),me.getYpos());
+		this.screen = screen;
 		screen.setVisible(true);	
 		ko = new KeyClass(this);
 		screen.addKeyListener(ko);
-
-
+		
 		service = ClientService.getInstance();
 		service.sendPlayerObject(me);
 	}
-
-
-
 
 	public void PlayerMoved(String direction) {
 		me.setDirection(direction);
@@ -115,10 +83,5 @@ public class GamePlayer implements Observer{
 			me.setYpos(y);
 		}
 		service.sendPlayerObject(me);
-	}
-
-	@Override
-	public void update(List<Player> list) {
-
 	}
 }
