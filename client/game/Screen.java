@@ -41,9 +41,7 @@ public class Screen extends JFrame {
 		this.setLocation(100, 100);
 		this.setSize(500, 500);
 		this.setResizable(false);
-		this.setVisible(true);
 		this.setLayout(new GridLayout(20, 20, 0, 0));
-		this.setAlwaysOnTop(true);
 		this.addKeyListener(new KeyListen());
 		
 		//Getting service classes
@@ -58,6 +56,10 @@ public class Screen extends JFrame {
 
 		//Drawing the level
 		draw();
+
+		//Set the frame visible!
+		this.setVisible(true);
+		this.setAlwaysOnTop(true);
 	}
 
 	/**
