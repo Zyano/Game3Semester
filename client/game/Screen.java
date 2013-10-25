@@ -30,10 +30,13 @@ public class Screen extends JFrame {
 
 	//Client Service
 	private ClientService clientService;
+	
+	//Score list
+	private ScoreList scoreList;
 
 
 	public Screen() {
-		super("TKgame v. 1.0");
+		super("Game");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocation(100, 100);
 		this.setSize(500, 500);
@@ -42,11 +45,14 @@ public class Screen extends JFrame {
 		this.setLayout(new GridLayout(20, 20, 0, 0));
 		this.setAlwaysOnTop(true);
 		this.addKeyListener(new KeyListen());
-
+		
 		//Getting service classes
 		moveService = MovementService.getInstance();
 		clientService = ClientService.getInstance();
-
+		
+		//creating the Score List
+		scoreList = new ScoreList();
+		
 		//Getting the level to play on
 		this.level = LevelManager.level;
 
@@ -74,7 +80,7 @@ public class Screen extends JFrame {
 			}
 		}
 		Player me = clientService.getMePlayer();
-//		labels[me.getXpos()][me.getYpos()].setIcon(new ImageIcon("./Image/HeltOp.png"));
+		labels[me.getXpos()][me.getYpos()].setIcon(new ImageIcon("./Image/HeltOp.png"));
 	}
 
 	//Private class for registering a key pressed
@@ -110,7 +116,7 @@ public class Screen extends JFrame {
 	 * @param y
 	 * @param playerDirection
 	 */
-	public void movePlayerOnScreen(int oldX, int oldY, int x, int y,String playerDirection) {
+	public void movePlayerOnScreen(int oldX, int oldY, int x, int y, String playerDirection) {
 		labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 		if (playerDirection.equals("right")) {
 			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));

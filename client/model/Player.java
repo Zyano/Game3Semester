@@ -2,8 +2,11 @@ package model;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
+
 public class Player implements Serializable {
+	
+	private static final long serialVersionUID = -7067161449558273773L;
+
 	private String name;
 	private int xpos;
 	private int ypos;
@@ -31,7 +34,6 @@ public class Player implements Serializable {
 	}
 
 	public void setXpos(int xpos) {
-		System.out.println("Set X pos " + xpos);
 		this.xpos = xpos;
 	}
 
@@ -40,7 +42,6 @@ public class Player implements Serializable {
 	}
 
 	public void setYpos(int ypos) {
-		System.out.println("Set Y pos " + ypos);
 		this.ypos = ypos;
 	}
 	public String getDirection() {
@@ -73,7 +74,6 @@ public class Player implements Serializable {
 	}
 	
 	public void setOldXPos(int oldXPos) {
-		System.out.println("Set X old pos " + oldXPos);
 		this.oldXPos = oldXPos;
 	}
 	
@@ -82,7 +82,6 @@ public class Player implements Serializable {
 	}
 	
 	public void setOldYPos(int oldYPos) {
-		System.out.println("Set Y old pos " + oldYPos);
 		this.oldYPos = oldYPos;
 	}
 }

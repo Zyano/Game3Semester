@@ -11,7 +11,6 @@ public class ObjectOutThread extends Thread {
 	private ObjectOutputStream out;
 	private volatile boolean running;
 	private ServerService serverservice;
-	private InetAddress ip;
 
 	/**
 	 * Object stream used to writing out player objects

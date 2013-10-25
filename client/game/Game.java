@@ -19,15 +19,18 @@ public class Game {
 		BufferedReader b = new BufferedReader (new InputStreamReader(System.in));
 		String name = b.readLine();
 		 
-		System.out.println("\n Thank you! Now creating your player");
+		System.out.println("\nThank you! Now creating your player");
 		ClientService clientService = ClientService.getInstance();
 		clientService.createMePlayer(name);
 		
-		System.out.println("\n Player created. Please input the ip of the server:");
+		System.out.println("\nPlayer created. Please input the ip of the server:");
 		String ip = b.readLine();
 		ConnectionService connectService = ConnectionService.getInstance();
 		connectService.initConnection(ip);
 		
+		
+		System.out.println("\nConnection completed!");
+		System.out.println("\nStarting game! Have a good one!");
 		Screen s = new Screen();
 	}
 
