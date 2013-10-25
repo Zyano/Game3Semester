@@ -1,40 +1,34 @@
 package game;
 
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
-import model.Player;
+import network.ConnectionService;
 import service.ClientService;
-import service.GuiService;
 
 public class Game {
 
 	/**
+	 * Method for starting the network game
 	 * @param args
-	 *
+	 * @throws Exception
 	 */
-	public static ArrayList<Player> players;
-	public static Player me;
-	
 	public static void main(String[] args) throws Exception {
-		System.out.println("Indtast dit spillernavn");
+		System.out.println("Please input your player name:");
 		BufferedReader b = new BufferedReader (new InputStreamReader(System.in));
-		String in = b.readLine();
+		String name = b.readLine();
 		 
-		players = new ArrayList<Player>();
-		me = new Player(in);
-		players.add(me);
+		System.out.println("\n Thank you! Now creating your player");
+		ClientService clientService = ClientService.getInstance();
+		clientService.createMePlayer(name);
 		
-		ScoreList s = new ScoreList(players);
-		s.setVisible(true);
-		Screen screen = new Screen(GamePlayer.level);
-		GamePlayer g = new GamePlayer(me,s, screen);
-		GuiService gs = GuiService.getInstance();
-		ClientService cs = ClientService.getInstance();
+		System.out.println("\n Player created. Please input the ip of the server:");
+		String ip = b.readLine();
+		ConnectionService connectService = ConnectionService.getInstance();
+		connectService.initConnection(ip);
 		
-		gs.setConnection(cs.getPlayerListContainer());
-		gs.subcribePlayerListContainer(screen);
+		Screen s = new Screen();
 	}
 
 }

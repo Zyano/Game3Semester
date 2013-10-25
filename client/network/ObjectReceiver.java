@@ -14,7 +14,6 @@ public class ObjectReceiver extends Thread {
 	private ObjectInputStream objectStream;
 //	private ClientService service;
 	private volatile boolean running;
-	private PlayerListContainer playerListContainer;
 	
 	/**
 	 * Given an input stream the constructor creates the ObjectInputStream used in the run method of receiver.
@@ -22,11 +21,10 @@ public class ObjectReceiver extends Thread {
 	 * @param ObjectInputStream
 	 * @throws IOException 
 	 */
-	public ObjectReceiver(InputStream ois, PlayerListContainer plc) throws IOException {
+	public ObjectReceiver(InputStream ois) throws IOException {
 		objectStream = new ObjectInputStream(ois);
 //		service = ClientService.getInstance();
 		running = true;
-		playerListContainer = plc;
 	}
 	
 	/**
@@ -47,7 +45,6 @@ public class ObjectReceiver extends Thread {
 				//We know that it is always an ArrayList containing players
 				@SuppressWarnings("unchecked")
 				List<Player> list = (ArrayList<Player>) obj;
-				playerListContainer.setList(list);
 			}
 		}
 	}

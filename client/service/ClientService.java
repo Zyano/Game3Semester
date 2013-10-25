@@ -1,18 +1,17 @@
 package service;
 
 
+import storage.Dao;
 import model.Player;
-import network.Connector;
-import network.PlayerListContainer;
 
 public class ClientService {
 
 	private static ClientService service;
-	private static Connector connection; 
+	private Dao dao;
 
 
 	private ClientService() {
-		connection = new Connector("localhost", "8888");
+		dao = Dao.getInstance();
 	}
 
 	/**
@@ -27,17 +26,14 @@ public class ClientService {
 		}
 		return service;
 	}
-
-	/**
-	 * Stream the player to the server triggering the update on the server.
-	 * @param Player
-	 */
-	public void sendPlayerObject(Player p) {
-		connection.sendPlayer(p);
+	
+	public void createMePlayer(String name){
+		Player me = new Player(name);
+		dao.storeMePlayer(me);
 	}
-
-	public PlayerListContainer getPlayerListContainer() {
-		return connection.getPlc();
+	
+	public Player getMePlayer(){
+		return dao.getMePlayer();
 	}
 	
 }
