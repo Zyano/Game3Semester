@@ -55,6 +55,11 @@ public class Player implements Serializable {
 		return name + "   " + point;
 	}
 	
+	@Override
+	public String toString () {
+		return name + "   " + point + " " + xpos + " " + ypos;
+	}
+	
 	public void addOnePoint() {
 		point ++;
 	}

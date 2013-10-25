@@ -34,6 +34,7 @@ public class ObjectStreamer {
 	public void streamPlayer (Player p) {
 		try {
 			oos.writeObject(p);
+			oos.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

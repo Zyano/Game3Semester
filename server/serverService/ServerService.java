@@ -49,7 +49,13 @@ public class ServerService {
 	 * @param player
 	 */
 	public void addPlayer(InetAddress ip, Player player) {
+		System.out.println("IP trying to update: " + ip + " player: " + player);
+		System.out.println("HashCode of player incomming: " + player.hashCode());
 		playerMap.put(ip, player);
+		System.out.println(playerMap.keySet());
+		System.out.println("Hashcode of player 0: "+getPlayers().get(0).hashCode());
+//		System.out.println(getPlayers());
+		
 	}
 
 	/**

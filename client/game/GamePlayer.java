@@ -83,5 +83,6 @@ public class GamePlayer{
 			me.setYpos(y);
 		}
 		service.sendPlayerObject(me);
+//		System.out.println(me.getXpos() + " " + me.getYpos());
 	}
 }

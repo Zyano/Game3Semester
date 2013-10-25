@@ -37,6 +37,7 @@ public class ObjectOutThread extends Thread {
 				out.flush();
 			} catch (IOException e) {
 				System.err.println("IOException in ObjectOutThread");
+				running = false;
 			}
 		}
 	}
