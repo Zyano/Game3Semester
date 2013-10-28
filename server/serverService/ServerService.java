@@ -80,8 +80,10 @@ public class ServerService {
 					serverPlayer.setXpos(5);
 					serverPlayer.setYpos(7);
 					serverPlayer.setOldXPos(5);
-					serverPlayer.setYpos(7);
+					serverPlayer.setOldYPos(7);
 					serverPlayer.setDirection("up");
+					System.out.println("Server: " + serverPlayer);
+					System.out.println("Me player " + p);
 				}
 			}
 		}
