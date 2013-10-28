@@ -40,6 +40,7 @@ public class MovementService {
 				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
 			}else if(p.getDead()) {
 				clientService.savePlayer(p);
+				movePlayer(me.getOldXPos(), me.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
 				p.setDead(false);
 			}
 
@@ -86,7 +87,10 @@ public class MovementService {
 	 * @param playerDirection
 	 */
 	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, JLabel[][] labels) {
-		labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+		Player me = clientService.getMePlayer();
+		if(me.getXpos() != oldX && me.getYpos() != oldY){
+			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+		}
 		if (playerDirection.equals("right")) {
 			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
 		}else if (playerDirection.equals("left")) {
