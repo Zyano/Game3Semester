@@ -25,17 +25,17 @@ public class ScorelistService {
 		this.score = score;
 	}
 
-	public void updateScore(Player p) {
+	public synchronized void updateScore(Player p) {
 		JLabel l = new JLabel(p.getName() + ": " + p.getPoint());
 		l.setSize(100,200);
 		score.addComponent(l);
 	}		
 
-	public void clearScore() {
+	public synchronized void clearScore() {
 		score.clearAll();
 	}
 	
-	public void validateAll(){
+	public synchronized void validateAll(){
 		score.validate();
 	}
 }
