@@ -1,12 +1,12 @@
 package guiService;
 
+import game.Screen;
+
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import network.ConnectionService;
-import game.Screen;
 import model.Player;
 import service.ClientService;
 
@@ -15,13 +15,12 @@ public class MovementService {
 	private static MovementService service;
 
 	private ClientService clientService;
-
-	private ConnectionService connectService;
-
+	
+	private ScorelistService scorelistService;
 
 	private MovementService(){
 		clientService = ClientService.getInstance();
-		connectService = ConnectionService.getInstance();
+		scorelistService = ScorelistService.getInstances();
 	}
 
 	public static MovementService getInstance(){
@@ -34,12 +33,15 @@ public class MovementService {
 	}
 
 	public synchronized void UpdateAllPlayersMovement(List<Player> players){
+		scorelistService.clearScore();
 		for(Player p : players){
 			clientService.getMePlayer();
 			if(p.getChecksum() != clientService.getMePlayer().getChecksum()) {
 				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
 			}
+			scorelistService.updateScore(p);
 		}
+		scorelistService.repaint();
 	}
 
 	public void playerMoved(String direction, JLabel[][] labels) {
