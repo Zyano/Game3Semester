@@ -6,8 +6,9 @@ import java.util.Random;
 
 public class Player implements Serializable {
 	
-	private static final long serialVersionUID = -7067161449558273773L;
 
+	private static final long serialVersionUID = 6412973416268459163L;
+	
 	private String name;
 	private int xpos;
 	private int ypos;
@@ -15,6 +16,9 @@ public class Player implements Serializable {
 	private int oldXPos;
 	private int oldYPos;
 	private String direction;
+	private boolean dead;
+	
+	
 	private final long checksum = new Random().nextLong()*new Random().nextLong()%1000000000;
 
 	public Player (String name) {
@@ -25,6 +29,7 @@ public class Player implements Serializable {
 		oldYPos= 7;
 		point = 0;
 		direction = "up";
+		dead = false;
 	}
 	
 	public long getSerialVersionUID(){
@@ -98,6 +103,15 @@ public class Player implements Serializable {
 	
 	public long getChecksum() {
 		return checksum;
+	}
+	
+	//dead
+	public boolean getDead(){
+		return dead;
+	}
+	
+	public void setDead(boolean dead){
+		this.dead = dead;
 	}
 
 	@Override

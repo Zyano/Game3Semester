@@ -82,6 +82,7 @@ public class ServerService {
 					serverPlayer.setOldXPos(5);
 					serverPlayer.setOldYPos(7);
 					serverPlayer.setDirection("up");
+					serverPlayer.setDead(true);
 					System.out.println("Server: " + serverPlayer);
 					System.out.println("Me player " + p);
 				}

@@ -15,7 +15,7 @@ public class MovementService {
 	private static MovementService service;
 
 	private ClientService clientService;
-	
+
 	private ScorelistService scorelistService;
 
 	private MovementService(){
@@ -34,11 +34,15 @@ public class MovementService {
 
 	public synchronized void UpdateAllPlayersMovement(List<Player> players){
 		scorelistService.clearScore();
+		Player me = clientService.getMePlayer();
 		for(Player p : players){
-//			clientService.getMePlayer();
-//			if(p.getChecksum() != clientService.getMePlayer().getChecksum()) {
+			if(p.getChecksum() != me.getChecksum()) {
 				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
-//			}
+			}else if(p.getDead()) {
+				clientService.savePlayer(p);
+				p.setDead(false);
+			}
+
 			scorelistService.updateScore(p);
 		}
 		scorelistService.validateAll();

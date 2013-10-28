@@ -37,4 +37,8 @@ public class ClientService {
 		return dao.getMePlayer();
 	}
 	
+	public void savePlayer(Player p){
+		dao.storeMePlayer(p);
+	}
+	
 }
