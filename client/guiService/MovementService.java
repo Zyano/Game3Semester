@@ -35,10 +35,10 @@ public class MovementService {
 	public synchronized void UpdateAllPlayersMovement(List<Player> players){
 		scorelistService.clearScore();
 		for(Player p : players){
-			clientService.getMePlayer();
-			if(p.getChecksum() != clientService.getMePlayer().getChecksum()) {
+//			clientService.getMePlayer();
+//			if(p.getChecksum() != clientService.getMePlayer().getChecksum()) {
 				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
-			}
+//			}
 			scorelistService.updateScore(p);
 		}
 		scorelistService.validateAll();
