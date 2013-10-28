@@ -87,7 +87,7 @@ public class MovementService {
 	 */
 	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, boolean clientMovement, JLabel[][] labels) {
 		Player me = clientService.getMePlayer();
-		if(me.getOldXPos() != x && me.getOldYPos() != y && clientMovement){
+		if(me.getOldXPos() != x || me.getOldYPos() != y && clientMovement){
 			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 		}
 		if (playerDirection.equals("right")) {
