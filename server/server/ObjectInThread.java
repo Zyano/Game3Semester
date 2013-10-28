@@ -38,7 +38,6 @@ public class ObjectInThread extends Thread {
 		while(running) {
 			try {
 				Object obj = inStream.readObject();
-				System.out.println("MODTAGET MODTAGET MODTAGET " + obj);
 				if(obj instanceof Player) {
 					Player p1 = (Player) obj;
 					service.savePlayer(ip, p1);

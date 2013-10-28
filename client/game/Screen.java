@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import network.ConnectionService;
 import model.Player;
 import service.ClientService;
 
@@ -32,6 +33,9 @@ public class Screen extends JFrame {
 	
 	//Score list
 	private ScoreList scoreList;
+	
+	//ConnectionService
+	private ConnectionService connectService;
 
 
 	public Screen() {
@@ -46,6 +50,7 @@ public class Screen extends JFrame {
 		//Getting service classes
 		moveService = MovementService.getInstance();
 		clientService = ClientService.getInstance();
+		connectService = ConnectionService.getInstance();
 		
 		//creating the Score List
 		scoreList = new ScoreList();
@@ -90,14 +95,15 @@ public class Screen extends JFrame {
 		@Override
 		public void keyPressed(KeyEvent ke) {
 			if (ke.getKeyCode() == KeyEvent.VK_UP) {
-				moveService.PlayerMoved("up", labels);
+				moveService.playerMoved("up", labels);
 			}else if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
-				moveService.PlayerMoved("down", labels);
+				moveService.playerMoved("down", labels);
 			}else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
-				moveService.PlayerMoved("left", labels);
+				moveService.playerMoved("left", labels);
 			}else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-				moveService.PlayerMoved("right", labels);
+				moveService.playerMoved("right", labels);
 			}
+			connectService.sendPlayer(clientService.getMePlayer());
 		}
 
 		@Override

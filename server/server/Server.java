@@ -33,13 +33,12 @@ public class Server {
 				//For each connection we start an in and an out thread,
 				//sending the ip in both, thereby making it possible for 
 				//adding updates and removing different players.
-				ObjectInThread inThread = new ObjectInThread(input, ip, service);
+				System.out.println("Now starting threads for connection");
+				(new ObjectInThread(input, ip, service)).start();
 				ObjectOut outStream = new ObjectOut(output, ip);
+				//Setting the sendExecuter
 				service.setSendExecuter(outStream);
 				
-				System.out.println("Now starting threads for connection");
-				//Starting both threads.
-				inThread.start();
 			}
 
 		} catch (IOException e) {

@@ -34,13 +34,18 @@ public class MovementService {
 	}
 
 	public synchronized void UpdateAllPlayersMovement(List<Player> players){
-		for(int i=0; i<players.size(); i++){
-			PlayerMoved(players.get(i).getDirection(), Screen.labels);
+		for(Player p : players){
+			//Freaking hack atm!!!!
+			//find solution
+			if(p.getSerialVersionUID() != clientService.getMePlayer().getSerialVersionUID()){
+				System.out.println(p);
+				playerMoved(p.getDirection(), Screen.labels);
+			}
 		}
 	}
 
 
-	public void PlayerMoved(String direction, JLabel[][] labels) {
+	public void playerMoved(String direction, JLabel[][] labels) {
 		Player me = clientService.getMePlayer();
 		me.setDirection(direction);
 		int x = me.getXpos();
@@ -67,9 +72,6 @@ public class MovementService {
 			me.setXpos(x);
 			me.setYpos(y);
 		}
-
-		//Send Player after update
-		connectService.sendPlayer(me);
 	}
 
 	/**

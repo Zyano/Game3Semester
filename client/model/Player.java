@@ -25,6 +25,10 @@ public class Player implements Serializable {
 		direction = "up";
 	}
 	
+	public long getSerialVersionUID(){
+		return serialVersionUID;
+	}
+	
 	//Points
 	
 	public int getPoint() {
