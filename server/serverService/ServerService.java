@@ -3,20 +3,22 @@ package serverService;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import server.ObjectOut;
 import model.Player;
+import server.ObjectOut;
 
 
 public class ServerService {
 
 	private static ServerService service;
 	private Map<InetAddress,Player> playerMap;
-	private ObjectOut sendExecuter;
+	private Set<ObjectOut> sendExecuters;
 
 	/**
 	 * Creates the single ServerService instance. 
@@ -25,6 +27,7 @@ public class ServerService {
 	 */
 	private ServerService() {
 		playerMap = new ConcurrentHashMap<>(5, 0.9f, 4);
+		sendExecuters = new HashSet<>();
 	}
 
 	/**
@@ -45,8 +48,12 @@ public class ServerService {
 	 * Sets the ObjectOut when creation on connection is done
 	 * @param sendExecuter
 	 */
-	public void setSendExecuter(ObjectOut sendExecuter){
-		this.sendExecuter = sendExecuter;
+	public void addSendExecuter(ObjectOut sendExecuter){
+		sendExecuters.add(sendExecuter);
+	}
+	
+	public void removeSendExecuter(ObjectOut sendExecuter) {
+		sendExecuters.remove(sendExecuter);
 	}
 
 	/**
@@ -59,7 +66,9 @@ public class ServerService {
 	 */
 	public void savePlayer(InetAddress ip, Player player) {
 		playerMap.put(ip, player);
-		sendExecuter.outStreamPlayers(getPlayers());
+		for(Iterator<ObjectOut> it =sendExecuters.iterator();it.hasNext();) {
+			it.next().outStreamPlayers(getPlayers());
+		}
 	}
 
 	/**

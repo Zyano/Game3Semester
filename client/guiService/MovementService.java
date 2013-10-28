@@ -37,10 +37,7 @@ public class MovementService {
 		for(Player p : players){
 			//Freaking hack atm!!!!
 			//find solution
-			if(p.getSerialVersionUID() != clientService.getMePlayer().getSerialVersionUID()){
-				System.out.println(p);
-				playerMoved(p.getDirection(), Screen.labels);
-			}
+			movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
 		}
 	}
 

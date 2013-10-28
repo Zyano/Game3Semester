@@ -37,7 +37,7 @@ public class Server {
 				(new ObjectInThread(input, ip, service)).start();
 				ObjectOut outStream = new ObjectOut(output, ip);
 				//Setting the sendExecuter
-				service.setSendExecuter(outStream);
+				service.addSendExecuter(outStream);
 				
 			}
 

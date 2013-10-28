@@ -33,5 +33,4 @@ public class Game {
 		System.out.println("\nStarting game! Have a good one!");
 		Screen s = new Screen();
 	}
-
 }
