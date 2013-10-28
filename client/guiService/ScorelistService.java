@@ -26,18 +26,16 @@ public class ScorelistService {
 	}
 
 	public void updateScore(Player p) {
-		System.out.println("updating scores");
 		JLabel l = new JLabel(p.getName() + ": " + p.getPoint());
-		l.setSize(50,200);
-		score.add(l);
+		l.setSize(100,200);
+		score.addComponent(l);
 	}		
 
 	public void clearScore() {
-		score.removeAll();
+		score.clearAll();
 	}
 	
-	public void repaint() {
-		score.repaint();
-		System.out.println(score.getComponentCount());
+	public void validateAll(){
+		score.validate();
 	}
 }

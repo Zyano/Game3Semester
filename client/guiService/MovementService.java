@@ -41,7 +41,7 @@ public class MovementService {
 			}
 			scorelistService.updateScore(p);
 		}
-		scorelistService.repaint();
+		scorelistService.validateAll();
 	}
 
 	public void playerMoved(String direction, JLabel[][] labels) {
