@@ -66,8 +66,24 @@ public class ServerService {
 	 */
 	public synchronized void savePlayer(InetAddress ip, Player player) {
 		playerMap.put(ip, player);	
+		findDeadPlayer(player);
 		for(Iterator<ObjectOut> it =sendExecuters.iterator();it.hasNext();) {
 			it.next().outStreamPlayers(getPlayers());
+		}
+	}
+	
+	private void findDeadPlayer(Player p){
+		for(Iterator<Player> it = playerMap.values().iterator(); it.hasNext();){
+			Player serverPlayer = it.next();
+			if(serverPlayer != p){
+				if(p.getXpos() == serverPlayer.getXpos() && p.getYpos() == serverPlayer.getYpos()){
+					serverPlayer.setXpos(5);
+					serverPlayer.setYpos(7);
+					serverPlayer.setOldXPos(5);
+					serverPlayer.setYpos(7);
+					serverPlayer.setDirection("up");
+				}
+			}
 		}
 	}
 
