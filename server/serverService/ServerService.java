@@ -79,8 +79,6 @@ public class ServerService {
 				if(p.getXpos() == serverPlayer.getXpos() && p.getYpos() == serverPlayer.getYpos()){
 					serverPlayer.setXpos(5);
 					serverPlayer.setYpos(7);
-					serverPlayer.setOldXPos(5);
-					serverPlayer.setOldYPos(7);
 					serverPlayer.setDirection("up");
 					serverPlayer.setDead(true);
 					System.out.println("Server: " + serverPlayer);
