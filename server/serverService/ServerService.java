@@ -75,7 +75,7 @@ public class ServerService {
 	private void findDeadPlayer(Player p){
 		for(Iterator<Player> it = playerMap.values().iterator(); it.hasNext();){
 			Player serverPlayer = it.next();
-			if(serverPlayer != p){
+			if(serverPlayer.getChecksum() != p.getChecksum()){
 				if(p.getXpos() == serverPlayer.getXpos() && p.getYpos() == serverPlayer.getYpos()){
 					serverPlayer.setXpos(5);
 					serverPlayer.setYpos(7);
