@@ -11,7 +11,7 @@ import serverService.ServerService;
 
 public class ObjectInThread extends Thread {
 	
-	private ObjectInputStream ois;
+	private ObjectInputStream inStream;
 	private volatile boolean running;
 	private ServerService service;
 	private InetAddress ip;
@@ -22,11 +22,11 @@ public class ObjectInThread extends Thread {
 	 * @param ois
 	 * @param ip
 	 */
-	public ObjectInThread(ObjectInputStream ois, InetAddress ip) {
-		this.ois = ois;
+	public ObjectInThread(ObjectInputStream inStream, InetAddress ip, ServerService service) {
+		this.inStream = inStream;
 		running = true;
 		this.ip = ip;
-		service = ServerService.getInstance();
+		this.service = service;
 	}
 
 	
@@ -37,27 +37,20 @@ public class ObjectInThread extends Thread {
 	public void run() {
 		while(running) {
 			try {
-				Object obj = ois.readObject();
+				Object obj = inStream.readObject();
+				System.out.println("MODTAGET MODTAGET MODTAGET " + obj);
 				if(obj instanceof Player) {
 					Player p1 = (Player) obj;
-					System.out.println(p1.toString());
-					System.out.println("Object received from IP: " + ip.toString());
-					service.addPlayer(ip, p1);
+					service.savePlayer(ip, p1);
 				}
 			}
 			catch (IOException e) {
-				e.printStackTrace();
 				System.err.println("IOException in ObjectInThread");
-				running=false;
-//				System.exit(-1);
+				running = false;
+				System.exit(-1);
 			} catch (ClassNotFoundException e) {
 				System.err.println("Object is not of class Player");
 			}
 		}
-	}
-
-	@Override
-	public String toString() {
-		return "ObjectInThread [running=" + running + ", ip=" + ip + "]";
 	}
 }

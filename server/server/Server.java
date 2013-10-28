@@ -7,6 +7,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import serverService.ServerService;
+
 public class Server {
 	
 	private static ServerSocket serverSocket;
@@ -16,6 +18,7 @@ public class Server {
 		try {
 			serverSocket = new ServerSocket(8888);
 			System.out.println("Server started, ready to receive connections");
+			ServerService service = ServerService.getInstance();
 			while(true){
 				Socket socket = serverSocket.accept();
 				System.out.println("Connection accepted");
@@ -30,14 +33,13 @@ public class Server {
 				//For each connection we start an in and an out thread,
 				//sending the ip in both, thereby making it possible for 
 				//adding updates and removing different players.
-				ObjectInThread inThread = new ObjectInThread(input, ip);
-				ObjectOutThread outThread = new ObjectOutThread(output, ip);
+				ObjectInThread inThread = new ObjectInThread(input, ip, service);
+				ObjectOut outStream = new ObjectOut(output, ip);
+				service.setSendExecuter(outStream);
 				
 				System.out.println("Now starting threads for connection");
 				//Starting both threads.
 				inThread.start();
-				outThread.start();
-				
 			}
 
 		} catch (IOException e) {

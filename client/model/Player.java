@@ -25,10 +25,23 @@ public class Player implements Serializable {
 		direction = "up";
 	}
 	
+	//Points
+	
 	public int getPoint() {
 		return point;
 	}
+	
+	public void addOnePoint() {
+		point ++;
+	}
 
+	public void subOnePoint() {
+		point --;
+	}
+
+	
+	//Actual position 
+	
 	public int getXpos() {
 		return xpos;
 	}
@@ -44,6 +57,9 @@ public class Player implements Serializable {
 	public void setYpos(int ypos) {
 		this.ypos = ypos;
 	}
+	
+	//Direction
+	
 	public String getDirection() {
 		return direction;
 	}
@@ -51,23 +67,8 @@ public class Player implements Serializable {
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
-
-	public String ToString () {
-		return name + "   " + point;
-	}
 	
-	@Override
-	public String toString () {
-		return name + "   " + point + " " + xpos + " " + ypos;
-	}
-	
-	public void addOnePoint() {
-		point ++;
-	}
-
-	public void subOnePoint() {
-		point --;
-	}
+	//Old positions
 	
 	public int getOldXPos() {
 		return oldXPos;
@@ -83,5 +84,11 @@ public class Player implements Serializable {
 	
 	public void setOldYPos(int oldYPos) {
 		this.oldYPos = oldYPos;
+	}
+	
+	
+	@Override
+	public String toString () {
+		return "old X: " + oldXPos + " old Y: " + oldYPos +  " new X: " + xpos + " new Y: " + ypos;
 	}
 }

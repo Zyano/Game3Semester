@@ -1,6 +1,8 @@
 package network;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -12,8 +14,9 @@ public class ConnectionService {
 	private static ConnectionService connection;
 
 	private String ip;
-	private ObjectStreamer os;
-	private Socket s;
+	private Socket clientSocket;
+	
+	private ObjectOutputStream outStream;
 
 	/**
 	 * Singleton pattern
@@ -43,25 +46,32 @@ public class ConnectionService {
 	}
 
 	/**
-	 * Creates the socket with the ip and port provided in the constructor.
-	 * if the connection is successfully created and the connection is alive.
-	 * Then ObjectReciver and ObjectStreamer is spawned and stated with the each of the streams from the socket.
+	 * Creates the socket with the specific ip.
 	 */
 	private void connect(String ip) {
 		try {
-			s = new Socket(ip, 8888);
+			clientSocket = new Socket(ip, 8888);
+			outStream = new ObjectOutputStream(clientSocket.getOutputStream());
+			outStream.flush();
+			
+			ObjectInputStream inStream = new ObjectInputStream(clientSocket.getInputStream());
+			(new ObjectInThread(inStream)).start();
+			
 		} catch (UnknownHostException e) {
 			System.err.println("UnknownHostException in ConnectionService");
 		} catch (IOException e) {
 			System.err.println("IOException in ConnectionService");
 		}
 	}
-
+	
+	/**
+	 * Disconnect for the connection
+	 */
 	public void disconnect() {
 		try {
-			s.close();
+			clientSocket.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("IOException in ConnectionService disconnect");
 		}
 	}
 
@@ -70,7 +80,14 @@ public class ConnectionService {
 	 * @param p
 	 */
 	public void sendPlayer(Player p){
-		os.streamPlayer(p);
+		try {
+			outStream.reset();
+			outStream.writeUnshared(p);
+			outStream.flush();
+			outStream.reset();
+		} catch (IOException e) {
+			System.err.println("IOException in ConnectionService sendPlayer");
+		}
 	}
 
 }

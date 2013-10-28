@@ -15,7 +15,8 @@ public class ClientService {
 	}
 
 	/**
-	 * Returns an instance of the ClientService class used to for the basic communication between the GUI and the network layer.
+	 * Returns an instance of the ClientService class used to for 
+	 * the basic communication between the GUI and the network layer.
 	 * @return ClientService
 	 */
 	public static synchronized ClientService getInstance() {

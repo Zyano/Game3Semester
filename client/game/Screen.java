@@ -6,7 +6,6 @@ import guiService.MovementService;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -20,7 +19,7 @@ public class Screen extends JFrame {
 	private static final long serialVersionUID = 2047917631676789660L;
 
 	// player locations
-	private JLabel[][] labels = new JLabel[20][20];
+	public static JLabel[][] labels = new JLabel[20][20];
 
 	// the map 
 	private String[][] level;
@@ -91,13 +90,13 @@ public class Screen extends JFrame {
 		@Override
 		public void keyPressed(KeyEvent ke) {
 			if (ke.getKeyCode() == KeyEvent.VK_UP) {
-				moveService.PlayerMoved("up", Screen.this);
+				moveService.PlayerMoved("up", labels);
 			}else if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
-				moveService.PlayerMoved("down", Screen.this);
+				moveService.PlayerMoved("down", labels);
 			}else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
-				moveService.PlayerMoved("left", Screen.this);
+				moveService.PlayerMoved("left", labels);
 			}else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-				moveService.PlayerMoved("right", Screen.this);
+				moveService.PlayerMoved("right", labels);
 			}
 		}
 
@@ -109,32 +108,10 @@ public class Screen extends JFrame {
 		public void keyTyped(KeyEvent arg0) {
 		}
 	}
-
-	/**
-	 * updates a player location.
-	 * @param oldX
-	 * @param oldY
-	 * @param x
-	 * @param y
-	 * @param playerDirection
-	 */
-	public void movePlayerOnScreen(int oldX, int oldY, int x, int y, String playerDirection) {
-		labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
-		if (playerDirection.equals("right")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
-		}else if (playerDirection.equals("left")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/Heltvenstre.png"));
-		}else if (playerDirection.equals("up")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/HeltOp.png"));
-		}else if (playerDirection.equals("down")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/HeltNed.png"));
-		}
-	}
-
 	
-	public void update(List<Player> list) {
-		Player p = clientService.getMePlayer();
-		movePlayerOnScreen(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection());
-	}
+//	public void update(List<Player> list) {
+//		Player p = clientService.getMePlayer();
+//		movePlayerOnScreen(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection());
+//	}
 
 }

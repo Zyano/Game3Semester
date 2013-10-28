@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import server.ObjectOut;
 import model.Player;
 
 
@@ -15,6 +16,7 @@ public class ServerService {
 
 	private static ServerService service;
 	private Map<InetAddress,Player> playerMap;
+	private ObjectOut sendExecuter;
 
 	/**
 	 * Creates the single ServerService instance. 
@@ -37,7 +39,14 @@ public class ServerService {
 			}
 		}
 		return service;
-
+	}
+	
+	/**
+	 * Sets the ObjectOut when creation on connection is done
+	 * @param sendExecuter
+	 */
+	public void setSendExecuter(ObjectOut sendExecuter){
+		this.sendExecuter = sendExecuter;
 	}
 
 	/**
@@ -48,14 +57,9 @@ public class ServerService {
 	 * @param ip
 	 * @param player
 	 */
-	public void addPlayer(InetAddress ip, Player player) {
-		System.out.println("IP trying to update: " + ip + " player: " + player);
-		System.out.println("HashCode of player incomming: " + player.hashCode());
+	public void savePlayer(InetAddress ip, Player player) {
 		playerMap.put(ip, player);
-		System.out.println(playerMap.keySet());
-		System.out.println("Hashcode of player 0: "+getPlayers().get(0).hashCode());
-//		System.out.println(getPlayers());
-		
+		sendExecuter.outStreamPlayers(getPlayers());
 	}
 
 	/**
@@ -75,7 +79,7 @@ public class ServerService {
 	 * return a HashMap of the concurrent map with the same keys and underlying values.
 	 * @return HashMap<Inetadress, Player>
 	 */
-	public List<Player> getPlayers() {
+	private List<Player> getPlayers() {
 		List<Player> result = new ArrayList<>();
 		for(Iterator<Player> it = playerMap.values().iterator(); it.hasNext();){
 			result.add(it.next());

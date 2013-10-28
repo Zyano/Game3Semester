@@ -16,6 +16,8 @@ public class ScoreList extends JFrame {
 		this.setSize(100, 500);
 		this.setResizable(false);
 		this.setLayout(new GridLayout(20, 20, 0, 0));
+
+		
 		this.setVisible(true);
 		this.setAlwaysOnTop(true);
 	}
