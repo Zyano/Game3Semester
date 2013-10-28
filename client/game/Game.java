@@ -31,6 +31,7 @@ public class Game {
 		
 		System.out.println("\nConnection completed!");
 		System.out.println("\nStarting game! Have a good one!");
-		Screen s = new Screen();
+		new Screen();
+		connectService.sendPlayer(clientService.getMePlayer());
 	}
 }
