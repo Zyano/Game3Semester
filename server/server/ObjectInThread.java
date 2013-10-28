@@ -40,6 +40,7 @@ public class ObjectInThread extends Thread {
 				Object obj = inStream.readObject();
 				if(obj instanceof Player) {
 					Player p1 = (Player) obj;
+					System.out.println("ssfhjæhæhaohæ "+p1);
 					service.savePlayer(ip, p1);
 				}
 			}

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Random;
 
 
 public class Player implements Serializable {
@@ -14,6 +15,7 @@ public class Player implements Serializable {
 	private int oldXPos;
 	private int oldYPos;
 	private String direction;
+	private final long checksum = new Random().nextLong()*new Random().nextLong()%1000000000;
 
 	public Player (String name) {
 		this.name = name;
@@ -90,7 +92,14 @@ public class Player implements Serializable {
 		this.oldYPos = oldYPos;
 	}
 	
+	public String getName() {
+		return name;
+	}
 	
+	public long getChecksum() {
+		return checksum;
+	}
+
 	@Override
 	public String toString () {
 		return "old X: " + oldXPos + " old Y: " + oldYPos +  " new X: " + xpos + " new Y: " + ypos;

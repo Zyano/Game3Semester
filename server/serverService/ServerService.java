@@ -43,7 +43,7 @@ public class ServerService {
 		}
 		return service;
 	}
-	
+
 	/**
 	 * Sets the ObjectOut when creation on connection is done
 	 * @param sendExecuter
@@ -51,7 +51,7 @@ public class ServerService {
 	public void addSendExecuter(ObjectOut sendExecuter){
 		sendExecuters.add(sendExecuter);
 	}
-	
+
 	public void removeSendExecuter(ObjectOut sendExecuter) {
 		sendExecuters.remove(sendExecuter);
 	}
@@ -64,8 +64,8 @@ public class ServerService {
 	 * @param ip
 	 * @param player
 	 */
-	public void savePlayer(InetAddress ip, Player player) {
-		playerMap.put(ip, player);
+	public synchronized void savePlayer(InetAddress ip, Player player) {
+		playerMap.put(ip, player);	
 		for(Iterator<ObjectOut> it =sendExecuters.iterator();it.hasNext();) {
 			it.next().outStreamPlayers(getPlayers());
 		}

@@ -35,12 +35,12 @@ public class MovementService {
 
 	public synchronized void UpdateAllPlayersMovement(List<Player> players){
 		for(Player p : players){
-			//Freaking hack atm!!!!
-			//find solution
-			movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
+			clientService.getMePlayer();
+			if(p.getChecksum() != clientService.getMePlayer().getChecksum()) {
+				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
+			}
 		}
 	}
-
 
 	public void playerMoved(String direction, JLabel[][] labels) {
 		Player me = clientService.getMePlayer();
