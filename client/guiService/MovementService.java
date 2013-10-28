@@ -37,13 +37,12 @@ public class MovementService {
 		Player me = clientService.getMePlayer();
 		for(Player p : players){
 			if(p.getChecksum() != me.getChecksum()) {
-				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
+				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), false, Screen.labels);
 			}else if(p.getDead()) {
-				clientService.savePlayer(p);
-				movePlayer(me.getOldXPos(), me.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
+				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), true, Screen.labels);
 				p.setDead(false);
+				clientService.savePlayer(p);
 			}
-
 			scorelistService.updateScore(p);
 		}
 		scorelistService.validateAll();
@@ -72,7 +71,7 @@ public class MovementService {
 		} 
 		else {
 			me.addOnePoint();
-			movePlayer(me.getOldXPos(), me.getOldYPos(), x, y, direction, labels);
+			movePlayer(me.getOldXPos(), me.getOldYPos(), x, y, direction, true, labels);
 			me.setXpos(x);
 			me.setYpos(y);
 		}
@@ -86,9 +85,9 @@ public class MovementService {
 	 * @param y
 	 * @param playerDirection
 	 */
-	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, JLabel[][] labels) {
+	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, boolean clientMovement, JLabel[][] labels) {
 		Player me = clientService.getMePlayer();
-		if(me.getXpos() != oldX && me.getYpos() != oldY){
+		if(me.getOldXPos() != x && me.getOldYPos() != y && !clientMovement){
 			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 		}
 		if (playerDirection.equals("right")) {
