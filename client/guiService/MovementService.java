@@ -96,10 +96,10 @@ public class MovementService {
 			
 			boolean found = false;
 			if(!me.getDead()){
-				Point[] noDarkness = me.visibilityMap();
+				Point[] darkness = me.visibilityMap();
 				int index = 0;
-				while(!found && index<noDarkness.length){
-					if(x == noDarkness[index].getX() && y == noDarkness[index].getY()){
+				while(!found && index<darkness.length){
+					if(x == darkness[index].getX() && y == darkness[index].getY()){
 						found = true;
 					}else index++;
 				}
