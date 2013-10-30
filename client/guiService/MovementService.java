@@ -88,7 +88,7 @@ public class MovementService {
 	 */
 	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, JLabel[][] labels, boolean clientMovement) {
 		Player me = clientService.getMePlayer();
-		if(!clientMovement && oldX != me.getXpos() && oldY != me.getYpos()) {
+		if(!clientMovement && (oldX != me.getXpos() || oldY != me.getYpos())) {
 			System.out.println("Other players");
 			System.out.println("old X: " + oldX + "     Old Y: " + oldY + "              X: " + x + "         Y: "+ y);
 			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
