@@ -108,13 +108,13 @@ public class MovementService {
 				} else if(clientMovement) {
 					labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 				}
-//				drawPlayer(me, playerDirection, x, y, labels);
+				drawPlayer(playerDirection, x, y, labels);
 			}
 		}
 	}
 
 
-	private void drawPlayer(Player me, String playerDirection, int x, int y, JLabel[][] labels){
+	private void drawPlayer(String playerDirection, int x, int y, JLabel[][] labels){
 		if (playerDirection.equals("right")) {
 			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
 		}else if (playerDirection.equals("left")) {
@@ -153,7 +153,7 @@ public class MovementService {
 				if(!found){
 					labels[i][j].setIcon(new ImageIcon("./Image/darkness.png"));
 				}
-				drawPlayer(me, me.getDirection(), me.getXpos(), me.getYpos(), labels);
+				drawPlayer(me.getDirection(), me.getXpos(), me.getYpos(), labels);
 			}
 		}
 	}
