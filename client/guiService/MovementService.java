@@ -109,8 +109,8 @@ public class MovementService {
 			} else if(clientMovement) {
 				labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 			}
-			drawPlayer(me, playerDirection, x, y, labels);
 		}
+		drawPlayer(me, playerDirection, x, y, labels);
 	}
 
 
