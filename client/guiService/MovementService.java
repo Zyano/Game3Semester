@@ -71,7 +71,7 @@ public class MovementService {
 		} 
 		else {
 			me.addOnePoint();
-//			System.out.println("old x: "+me.getOldXPos() +" old y: " + me.getOldYPos() + " X: " + x + " y: "+ y);
+			System.out.println("old x: "+me.getOldXPos() +" old y: " + me.getOldYPos() + " X: " + x + " y: "+ y);
 			movePlayer(me.getOldXPos(), me.getOldYPos(), x, y, direction, labels, true);
 			me.setXpos(x);
 			me.setYpos(y);
@@ -90,7 +90,7 @@ public class MovementService {
 		Player me = clientService.getMePlayer();
 		if(!clientMovement && oldX != me.getXpos() && oldY != me.getYpos()) {
 			System.out.println("Other players");
-			System.out.println(oldX + "      " + oldY);
+			System.out.println("old X: " + oldX + "     Old Y: " + oldY + "              X: " + x + "         Y: "+ y);
 			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 		} else if(clientMovement) {
 			System.out.println("Client movement");
