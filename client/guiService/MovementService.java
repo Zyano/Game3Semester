@@ -37,9 +37,9 @@ public class MovementService {
 		Player me = clientService.getMePlayer();
 		for(Player p : players){
 			if(p.getChecksum() != me.getChecksum()) {
-				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
+				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels, false);
 			}else if(p.getDead()) {
-				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels);
+				movePlayer(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection(), Screen.labels, true);
 				p.setDead(false);
 				clientService.savePlayer(p);
 			}
@@ -72,7 +72,7 @@ public class MovementService {
 		else {
 			me.addOnePoint();
 			System.out.println("old x: "+me.getOldXPos() +" old y: " + me.getOldYPos() + " X: " + x + " y: "+ y);
-			movePlayer(me.getOldXPos(), me.getOldYPos(), x, y, direction, labels);
+			movePlayer(me.getOldXPos(), me.getOldYPos(), x, y, direction, labels, true);
 			me.setXpos(x);
 			me.setYpos(y);
 		}
@@ -86,9 +86,13 @@ public class MovementService {
 	 * @param y
 	 * @param playerDirection
 	 */
-	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, JLabel[][] labels) {
+	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, JLabel[][] labels, boolean clientMovement) {
 		Player me = clientService.getMePlayer();
-		if((x != me.getOldXPos() || y != me.getOldYPos()) && oldX != x && oldY != y) {
+		if(!clientMovement && oldX != me.getXpos() && oldY != me.getYpos()) {
+			System.out.println("Other players");
+			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+		} else if(clientMovement) {
+			System.out.println("Client movement");
 			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 		}
 		if (playerDirection.equals("right")) {
