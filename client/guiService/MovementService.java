@@ -92,7 +92,18 @@ public class MovementService {
 		Player me = clientService.getMePlayer();
 		if(disconnectPlayer(playerDirection)){
 			labels[x][y].setIcon(new ImageIcon("./Image/Gulv2.png"));
-		}else{
+		}
+
+		Point[] noDarkness = me.visibilityMap();
+		int index = 0;
+		boolean found = false;
+		while(!found && index<noDarkness.length){
+			if(x == noDarkness[index].getX() && y == noDarkness[index].getY()){
+				found = true;
+			}else index++;
+		}
+
+		if(found){
 			if(!clientMovement && (oldX != me.getXpos() || oldY != me.getYpos())) {
 				labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 			} else if(clientMovement) {
@@ -101,7 +112,8 @@ public class MovementService {
 			drawPlayer(me, playerDirection, x, y, labels);
 		}
 	}
-	
+
+
 	private void drawPlayer(Player me, String playerDirection, int x, int y, JLabel[][] labels){
 		if (playerDirection.equals("right")) {
 			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
@@ -113,31 +125,31 @@ public class MovementService {
 			labels[x][y].setIcon(new ImageIcon("./Image/HeltNed.png"));
 		}
 	}
-	
+
 	private boolean disconnectPlayer(String playerDirection){
 		return playerDirection.equals("disconnect");
 	}
-	
+
 	private void makeDarkness(Player me, JLabel[][] labels){
 		Point[] noDarkness = me.visibilityMap();
-		
+
 		for(int i=0; i<labels.length; i++){
 			for(int j=0; j<labels[i].length; j++){
-				
+
 				//checking all visibility locations for each label location
 				int index = 0;
 				boolean found = false;
 				while(!found && index<noDarkness.length){
 					if(i == noDarkness[index].getX() && j == noDarkness[index].getY()){
-						
+
 						if (LevelManager.getLocation(i, j).equals(LevelManager.wall)){
 							labels[i][j].setIcon(new ImageIcon("./Image/mur1.png"));
 						}else labels[i][j].setIcon(new ImageIcon("./Image/gulv2.png"));
 						found = true;
-					
+
 					}else index++;
 				}
-				
+
 				if(!found){
 					labels[i][j].setIcon(new ImageIcon("./Image/darkness.png"));
 				}
