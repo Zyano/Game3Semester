@@ -71,7 +71,6 @@ public class MovementService {
 		} 
 		else {
 			me.addOnePoint();
-			System.out.println("old x: "+me.getOldXPos() +" old y: " + me.getOldYPos() + " X: " + x + " y: "+ y);
 			movePlayer(me.getOldXPos(), me.getOldYPos(), x, y, direction, labels, true);
 			me.setXpos(x);
 			me.setYpos(y);
@@ -88,22 +87,23 @@ public class MovementService {
 	 */
 	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, JLabel[][] labels, boolean clientMovement) {
 		Player me = clientService.getMePlayer();
-		if(!clientMovement && (oldX != me.getXpos() || oldY != me.getYpos())) {
-			System.out.println("Other players");
-			System.out.println("old X: " + oldX + "     Old Y: " + oldY + "              X: " + x + "         Y: "+ y);
-			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
-		} else if(clientMovement) {
-			System.out.println("Client movement");
-			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
-		}
-		if (playerDirection.equals("right")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
-		}else if (playerDirection.equals("left")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/Heltvenstre.png"));
-		}else if (playerDirection.equals("up")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/HeltOp.png"));
-		}else if (playerDirection.equals("down")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/HeltNed.png"));
+		if(playerDirection.equals("disconnect")){
+			labels[x][y].setIcon(new ImageIcon("./Image/Gulv2.png"));
+		}else{
+			if(!clientMovement && (oldX != me.getXpos() || oldY != me.getYpos())) {
+				labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+			} else if(clientMovement) {
+				labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+			}
+			if (playerDirection.equals("right")) {
+				labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
+			}else if (playerDirection.equals("left")) {
+				labels[x][y].setIcon(new ImageIcon("./Image/Heltvenstre.png"));
+			}else if (playerDirection.equals("up")) {
+				labels[x][y].setIcon(new ImageIcon("./Image/HeltOp.png"));
+			}else if (playerDirection.equals("down")) {
+				labels[x][y].setIcon(new ImageIcon("./Image/HeltNed.png"));
+			}
 		}
 	}
 }

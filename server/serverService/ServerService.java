@@ -55,6 +55,28 @@ public class ServerService {
 	public void removeSendExecuter(ObjectOut sendExecuter) {
 		sendExecuters.remove(sendExecuter);
 	}
+	
+	public void removeSendExecuterByIP(InetAddress ip) {
+		Iterator<ObjectOut> it = sendExecuters.iterator();
+		boolean removed = false;
+		while(it.hasNext() && !removed) {
+			ObjectOut temp = it.next();
+			if(temp.getIp().equals(ip)){
+				it.remove();
+				removed = true;
+			}
+		}
+	}
+	
+	public synchronized void transmitDisconnectedPlayer(InetAddress ip){
+		removeSendExecuterByIP(ip);
+		Player p = playerMap.get(ip);
+		p.setDirection("disconnect");
+		for(Iterator<ObjectOut> it =sendExecuters.iterator();it.hasNext();) {
+			it.next().outStreamPlayers(getPlayers());
+		}
+		playerMap.remove(ip);
+	}
 
 	/**
 	 * Adds a player to the ConcurrentHashMap, we first check if the

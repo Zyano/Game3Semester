@@ -45,8 +45,8 @@ public class ObjectInThread extends Thread {
 			}
 			catch (IOException e) {
 				System.err.println("IOException in ObjectInThread");
+				service.transmitDisconnectedPlayer(ip);
 				running = false;
-				System.exit(-1);
 			} catch (ClassNotFoundException e) {
 				System.err.println("Object is not of class Player");
 			}
