@@ -71,6 +71,7 @@ public class MovementService {
 		} 
 		else {
 			me.addOnePoint();
+			System.out.println("old x: "+me.getOldXPos() +" old y: " + me.getOldYPos() + " X: " + x + " y: "+ y);
 			movePlayer(me.getOldXPos(), me.getOldYPos(), x, y, direction, labels);
 			me.setXpos(x);
 			me.setYpos(y);
@@ -87,7 +88,7 @@ public class MovementService {
 	 */
 	private void movePlayer(int oldX, int oldY, int x, int y, String playerDirection, JLabel[][] labels) {
 		Player me = clientService.getMePlayer();
-		if(oldX != me.getXpos() && oldY != me.getYpos()) {
+		if(x != me.getOldXPos() || y != me.getOldYPos()) {
 			labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 		}
 		if (playerDirection.equals("right")) {
