@@ -92,25 +92,25 @@ public class MovementService {
 		Player me = clientService.getMePlayer();
 		if(disconnectPlayer(playerDirection)){
 			labels[x][y].setIcon(new ImageIcon("./Image/Gulv2.png"));
-		}
+		}else{
+			Point[] noDarkness = me.visibilityMap();
+			int index = 0;
+			boolean found = false;
+			while(!found && index<noDarkness.length){
+				if(x == noDarkness[index].getX() && y == noDarkness[index].getY()){
+					found = true;
+				}else index++;
+			}
 
-		Point[] noDarkness = me.visibilityMap();
-		int index = 0;
-		boolean found = false;
-		while(!found && index<noDarkness.length){
-			if(x == noDarkness[index].getX() && y == noDarkness[index].getY()){
-				found = true;
-			}else index++;
-		}
-
-		if(found){
-			if(!clientMovement && (oldX != me.getXpos() || oldY != me.getYpos())) {
-				labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
-			} else if(clientMovement) {
-				labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+			if(found){
+				if(!clientMovement && (oldX != me.getXpos() || oldY != me.getYpos())) {
+					labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+				} else if(clientMovement) {
+					labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+				}
+//				drawPlayer(me, playerDirection, x, y, labels);
 			}
 		}
-		drawPlayer(me, playerDirection, x, y, labels);
 	}
 
 
