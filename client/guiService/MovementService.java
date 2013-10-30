@@ -153,8 +153,8 @@ public class MovementService {
 				if(!found){
 					labels[i][j].setIcon(new ImageIcon("./Image/darkness.png"));
 				}
-				drawPlayer(me.getDirection(), me.getXpos(), me.getYpos(), labels);
 			}
 		}
+		drawPlayer(me.getDirection(), me.getXpos(), me.getYpos(), labels);
 	}
 }
