@@ -139,7 +139,7 @@ public class MovementService {
 				}
 				
 				if(!found){
-					labels[i][j].setIcon(new ImageIcon("./Image/mur5.png"));
+					labels[i][j].setIcon(new ImageIcon("./Image/darkness.png"));
 				}
 				drawPlayer(me, me.getDirection(), me.getXpos(), me.getYpos(), labels);
 			}
