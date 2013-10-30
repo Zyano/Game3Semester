@@ -93,16 +93,19 @@ public class MovementService {
 		if(disconnectPlayer(playerDirection)){
 			labels[x][y].setIcon(new ImageIcon("./Image/Gulv2.png"));
 		}else{
-			Point[] noDarkness = me.visibilityMap();
-			int index = 0;
+			
 			boolean found = false;
-			while(!found && index<noDarkness.length){
-				if(x == noDarkness[index].getX() && y == noDarkness[index].getY()){
-					found = true;
-				}else index++;
+			if(!me.getDead()){
+				Point[] noDarkness = me.visibilityMap();
+				int index = 0;
+				while(!found && index<noDarkness.length){
+					if(x == noDarkness[index].getX() && y == noDarkness[index].getY()){
+						found = true;
+					}else index++;
+				}
 			}
 
-			if(found){
+			if(found || me.getDead()){
 				if(!clientMovement && (oldX != me.getXpos() || oldY != me.getYpos())) {
 					labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
 				} else if(clientMovement) {
