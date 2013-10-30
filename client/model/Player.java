@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.Random;
 
@@ -112,6 +113,30 @@ public class Player implements Serializable {
 	
 	public void setDead(boolean dead){
 		this.dead = dead;
+	}
+	
+	public void addFiftyPoints() {
+		point += 50;
+	}
+	
+	public void removeFiftyPoints() {
+		point -= 50;
+	}
+	
+	public Point[] visibilityMap(){
+		Point[] visibilityMap = new Point[25];
+		int tempX = xpos-2;
+		int tempY = ypos-2;
+		int index = 0;
+		
+		for(int row = tempX; row < (tempX + 5); row++){
+			for(int coloum = tempY; coloum < (tempY + 5); coloum++){
+				visibilityMap[index] = new Point(row, coloum);
+				index++;
+			}
+		}
+		
+		return visibilityMap;
 	}
 
 	@Override

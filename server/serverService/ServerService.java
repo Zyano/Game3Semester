@@ -105,11 +105,8 @@ public class ServerService {
 					serverPlayer.setOldYPos(7);
 					serverPlayer.setDirection("up");
 					serverPlayer.setDead(true);
-					p.addOnePoint();
-					p.addOnePoint();
-					p.addOnePoint();
-					p.addOnePoint();
-					p.addOnePoint();
+					p.addFiftyPoints();
+					serverPlayer.removeFiftyPoints();
 					System.out.println("Server: " + serverPlayer);
 					System.out.println("Me player " + p);
 				}
