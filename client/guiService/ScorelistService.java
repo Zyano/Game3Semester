@@ -6,12 +6,15 @@ import javax.swing.JLabel;
 
 import model.Player;
 
+/**
+ * Class for updating the score list of the all players 
+ *
+ */
 public class ScorelistService {
 	private static ScorelistService service;
 	private ScoreList score;
 
 	private ScorelistService() {
-
 	}
 
 	public static ScorelistService getInstances() {

@@ -52,10 +52,20 @@ public class ServerService {
 		sendExecuters.add(sendExecuter);
 	}
 
+	
+	/**
+	 * Method for removing a specific ObjectOut
+	 * @param sendExecuter
+	 */
 	public void removeSendExecuter(ObjectOut sendExecuter) {
 		sendExecuters.remove(sendExecuter);
 	}
 	
+	
+	/**
+	 * Method for removing a ObjectOut based on the ip 
+	 * @param ip
+	 */
 	public void removeSendExecuterByIP(InetAddress ip) {
 		Iterator<ObjectOut> it = sendExecuters.iterator();
 		boolean removed = false;
@@ -68,6 +78,12 @@ public class ServerService {
 		}
 	}
 	
+	
+	/**
+	 * Method for removing a disconnected player and streaming the 
+	 * new information to all other players.
+	 * @param ip
+	 */
 	public synchronized void transmitDisconnectedPlayer(InetAddress ip){
 		removeSendExecuterByIP(ip);
 		Player p = playerMap.get(ip);
@@ -94,6 +110,13 @@ public class ServerService {
 		}
 	}
 	
+	
+	/**
+	 * Method for adding points to the player who killed another player
+	 * and subtracting points from the dead player and reposition that player
+	 * to the start point X = 5 and Y = 7
+	 * @param p
+	 */
 	private void findDeadPlayer(Player p){
 		for(Iterator<Player> it = playerMap.values().iterator(); it.hasNext();){
 			Player serverPlayer = it.next();
@@ -107,8 +130,6 @@ public class ServerService {
 					serverPlayer.setDead(true);
 					p.addFiftyPoints();
 					serverPlayer.removeFiftyPoints();
-					System.out.println("Server: " + serverPlayer);
-					System.out.println("Me player " + p);
 				}
 			}
 		}

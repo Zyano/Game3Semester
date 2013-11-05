@@ -123,6 +123,8 @@ public class Player implements Serializable {
 		point -= 50;
 	}
 	
+	
+	//Visibility of the specific player
 	public Point[] visibilityMap(){
 		Point[] visibilityMap = new Point[25];
 		int tempX = xpos-2;

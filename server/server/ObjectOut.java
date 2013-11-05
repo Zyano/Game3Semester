@@ -34,7 +34,6 @@ public class ObjectOut {
 	/**
 	 * 
 	 * Writes out the list of players and flushes it.
-	 * TODO: Missing Exception for IP (Map<key, value> - 2 players with same name)
 	 */
 	public void outStreamPlayers(List<Player> players){
 		try {

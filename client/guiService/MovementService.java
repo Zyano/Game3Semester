@@ -25,6 +25,10 @@ public class MovementService {
 		scorelistService = ScorelistService.getInstances();
 	}
 
+	/**
+	 * Singleton pattern
+	 * @return
+	 */
 	public static MovementService getInstance(){
 		synchronized (MovementService.class) {
 			if(service == null){
@@ -34,6 +38,10 @@ public class MovementService {
 		return service;
 	}
 
+	/**
+	 * Method for updating all player movements, which have been received from the server.
+	 * @param players
+	 */
 	public synchronized void UpdateAllPlayersMovement(List<Player> players){
 		scorelistService.clearScore();
 		Player me = clientService.getMePlayer();
@@ -50,6 +58,13 @@ public class MovementService {
 		scorelistService.validateAll();
 	}
 
+	
+	/**
+	 * Method for moving the local player and calculating new X and Y
+	 * and saving the oldX and oldY position
+	 * @param direction
+	 * @param labels
+	 */
 	public void playerMoved(String direction, JLabel[][] labels) {
 		Player me = clientService.getMePlayer();
 		me.setDirection(direction);
@@ -81,7 +96,7 @@ public class MovementService {
 	}
 
 	/**
-	 * updates a player location.
+	 * Method for updating player location
 	 * @param oldX
 	 * @param oldY
 	 * @param x
@@ -116,7 +131,13 @@ public class MovementService {
 		}
 	}
 
-
+	/**
+	 * Method for drawing a player based on the direction
+	 * @param playerDirection
+	 * @param x
+	 * @param y
+	 * @param labels
+	 */
 	private void drawPlayer(String playerDirection, int x, int y, JLabel[][] labels){
 		if (playerDirection.equals("right")) {
 			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
@@ -128,11 +149,21 @@ public class MovementService {
 			labels[x][y].setIcon(new ImageIcon("./Image/HeltNed.png"));
 		}
 	}
-
+	
+	/**
+	 * Method for checking if a player has disconnected
+	 * @param playerDirection
+	 * @return
+	 */
 	private boolean disconnectPlayer(String playerDirection){
 		return playerDirection.equals("disconnect");
 	}
-
+	
+	/**
+	 * Method for making the game black except the area around the player
+	 * @param me
+	 * @param labels
+	 */
 	private void makeDarkness(Player me, JLabel[][] labels){
 		Point[] noDarkness = me.visibilityMap();
 

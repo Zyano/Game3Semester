@@ -4,6 +4,9 @@ package service;
 import storage.Dao;
 import model.Player;
 
+/**
+ *	Class for helping with creation and storage of a player 
+ */
 public class ClientService {
 
 	private static ClientService service;

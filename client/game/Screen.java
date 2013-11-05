@@ -114,10 +114,4 @@ public class Screen extends JFrame {
 		public void keyTyped(KeyEvent arg0) {
 		}
 	}
-	
-//	public void update(List<Player> list) {
-//		Player p = clientService.getMePlayer();
-//		movePlayerOnScreen(p.getOldXPos(), p.getOldYPos(), p.getXpos(), p.getYpos(), p.getDirection());
-//	}
-
 }

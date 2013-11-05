@@ -9,6 +9,10 @@ import java.util.List;
 
 import model.Player;
 
+/**
+ *	Class for listening for new elements from the server and thereby calling 
+ *	MovementService method for handling the new information. 
+ */
 public class ObjectInThread extends Thread {
 
 
