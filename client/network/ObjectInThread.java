@@ -36,9 +36,7 @@ public class ObjectInThread extends Thread {
 					moveService.UpdateAllPlayersMovement(players);
 				}
 			} catch (ClassNotFoundException e) {
-				System.err.println("ClassNotFoundException in ObjectInThread Client");
 			} catch (IOException e) {
-				System.err.println("IOException in ObjectInThread Client");
 				System.exit(-1);
 			}
 		}

@@ -38,6 +38,10 @@ public class ConnectionService {
 		return connection;
 	}
 
+	/**
+	 * sets the IP if non is already set and connects to it.
+	 * @param ip
+	 */
 	public void initConnection(String ip){
 		if(this.ip.equals("")){
 			this.ip = ip;
@@ -58,9 +62,7 @@ public class ConnectionService {
 			(new ObjectInThread(inStream)).start();
 			
 		} catch (UnknownHostException e) {
-			System.err.println("UnknownHostException in ConnectionService");
 		} catch (IOException e) {
-			System.err.println("IOException in ConnectionService");
 		}
 	}
 	
@@ -71,7 +73,6 @@ public class ConnectionService {
 		try {
 			clientSocket.close();
 		} catch (IOException e) {
-			System.err.println("IOException in ConnectionService disconnect");
 		}
 	}
 
@@ -86,7 +87,6 @@ public class ConnectionService {
 			outStream.flush();
 			outStream.reset();
 		} catch (IOException e) {
-			System.err.println("IOException in ConnectionService sendPlayer");
 		}
 	}
 

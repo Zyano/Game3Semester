@@ -42,7 +42,6 @@ public class ObjectOut {
 			outStream.flush();
 			outStream.reset();
 		} catch (IOException e) {
-			System.err.println("IOException in ObjectOut");
 			serverService.removeSendExecuter(this);
 		}
 	}

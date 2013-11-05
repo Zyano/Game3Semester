@@ -22,6 +22,10 @@ public class Player implements Serializable {
 	
 	private final long checksum = new Random().nextLong()*new Random().nextLong()%1000000000;
 
+	/**
+	 * Creates a player with the default spawn location.
+	 * @param name
+	 */
 	public Player (String name) {
 		this.name = name;
 		xpos = 5;
@@ -124,7 +128,10 @@ public class Player implements Serializable {
 	}
 	
 	
-	//Visibility of the specific player
+	/**
+	 * Creates the visibility map for the player with the array being returned containing the points which is supposed to be visible.
+	 * @return
+	 */
 	public Point[] visibilityMap(){
 		Point[] visibilityMap = new Point[25];
 		int tempX = xpos-2;

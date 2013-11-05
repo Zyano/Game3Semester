@@ -36,10 +36,18 @@ public class ClientService {
 		dao.storeMePlayer(me);
 	}
 	
+	/**
+	 * gets the client player.
+	 * @return
+	 */
 	public Player getMePlayer(){
 		return dao.getMePlayer();
 	}
 	
+	/**
+	 * Saves a player in dao.
+	 * @param p
+	 */
 	public void savePlayer(Player p){
 		dao.storeMePlayer(p);
 	}

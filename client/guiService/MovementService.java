@@ -2,7 +2,6 @@ package guiService;
 
 import game.Screen;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class MovementService {
 
 	/**
 	 * Singleton pattern
-	 * @return
+	 * @return MovementService
 	 */
 	public static MovementService getInstance(){
 		synchronized (MovementService.class) {
@@ -96,7 +95,7 @@ public class MovementService {
 	}
 
 	/**
-	 * Method for updating player location
+	 * Method for updating player location. This method also updates a dead players location so we don't have a ghost after a dead player.
 	 * @param oldX
 	 * @param oldY
 	 * @param x
